@@ -48,6 +48,14 @@ git clone https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3
 ```
 ---
 
+
+
+## NOT
+```sh
+JDK Sürümü 17 olsun
+```
+---
+
 ## Version
 ```sh
 git -v
