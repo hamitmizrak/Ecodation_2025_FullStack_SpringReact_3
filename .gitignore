@@ -1,5 +1,7 @@
 # Special Git
 frontend/node_modules
+log
+database_memory_persist
 
 HELP.md
 target/
