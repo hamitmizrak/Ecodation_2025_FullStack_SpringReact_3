@@ -1,0 +1,15 @@
+VS CODE 
+
+-- Rename
+F2
+
+-- Comment
+Ctrl + K 
+Ctrl + K + C
+
+-- Aynı satırı kopyala
+Ctrl+ D 
+
+
+-- Beutify (Formatlama)
+Shift + Alt + F 

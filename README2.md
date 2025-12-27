@@ -13,7 +13,7 @@ mvn clean install
 project name: _2025_backend_1
 spring boot version: 3.3.7
 JDK: 17
-git url: https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3
+git url: https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3.git
 ```
 ---
 

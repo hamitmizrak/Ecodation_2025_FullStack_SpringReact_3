@@ -2,11 +2,11 @@
 
 ## 🔍 Hamit Mızrak Repo İstatistikleri
 
-![Ziyaretçi Sayısı](https://visitor-badge.laobi.icu/badge?page_id=hamitmizrak.https://github.com/hamitmizrak/2025_Ecodation_Frontend2)
-![Stars](https://img.shields.io/github/stars/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend2?style=social)
-![Forks](https://img.shields.io/github/forks/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend2?style=social)
-![Son Commit](https://img.shields.io/github/last-commit/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend2)
-![License](https://img.shields.io/github/license/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend2)
+![Ziyaretçi Sayısı](https://visitor-badge.laobi.icu/badge?page_id=hamitmizrak.https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32)
+![Stars](https://img.shields.io/github/stars/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32?style=social)
+![Forks](https://img.shields.io/github/forks/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32?style=social)
+![Son Commit](https://img.shields.io/github/last-commit/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32)
+![License](https://img.shields.io/github/license/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32)
 
 ## 🏆 Hamit Mızrak Profil Ödülleri
 
@@ -18,7 +18,7 @@
 <br>
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=hamitmizrak&layout=compact)
 <br>
-[![Pinned Repo](https://github-readme-stats.vercel.app/api/pin/?username=hamitmizrak&repo=https://github.com/hamitmizrak/2025_Ecodation_Frontend2)](https://github.com/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend2)
+[![Pinned Repo](https://github-readme-stats.vercel.app/api/pin/?username=hamitmizrak&repo=https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32)](https://github.com/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32)
 
 ## 📈 Hamit Mızrak Aktivite Grafiği
 
@@ -30,34 +30,29 @@
 
 [![WakaTime](https://github-readme-stats.vercel.app/api/wakatime?username=hamitmizrak)](https://wakatime.com/@hamitmizrak)
 
-# Ecodation Full Stack Frontend -2
+# Ecodation Full Stack Frontend -
 
-[GitHub Address](https://github.com/hamitmizrak/2025_Ecodation_Frontend2.git)
+[GitHub Address](https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32.git)
 
 ---
 
-# Git
+# Full Stack -3
+
+# Proje Hakkında
 
 ```sh
-git init
-git add .
-git commit -m "all data"
-git remote add origin GİTHUB_URL
-git push -u origin main
-
+Bu projede kullanıcı kaydı olduğunda js üzerinden localstorage kayıt işlemiş gerçekleşiyor. Ve kullanıcı bu bilgilere göre sisteme giriyor.
 ```
 
----
-
-# Git Clone
+## Linkler
 
 ```sh
-git clone https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3
-cd 2025_Ecodation_Frontend2
-npm install
-VEYA
-npm i
-
+https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_3_FullStack_3
+https://nodejs.org/en/download
+https://github.com/signup
+https://git-scm.com/install/windows
+https://www.w3schools.com/html/
+https://docs.emmet.io/cheat-sheet/
 ```
 
 ---
@@ -69,6 +64,40 @@ git -v
 npm -v
 node -v
 ```
+
+## NPM (PACKAGE.JSON)
+
+```sh
+npm init -y
+npm init
+
+```
+
+---
+
+## NPM INSTALL
+
+## Hızlıca Projeyi ayağa kaldırmak istersek yani `npm init -y` yazmadan terminal üzerinden projeyi hızlıca ayağa kaldırmak için kullanılır.
+
+#### Tek seferde birden fazla kütüphane eklemek (-g, -D, --save --save-dev)
+
+```sh
+npm install bootstrap sass jquery jquery-ui @popperjs/core  --save
+npm install wowjs animate.css sweetalert2  counterup2  --save
+npm install @fortawesome/fontawesome-free  --save
+npm install gh-pages aos axios --save
+
+
+> Çoklu Yükleme
+npm install browser-sync eslint lite-server parcel prettier  --save-dev
+
+> Teker teker yükleme
+npm install http-server -g
+npm install http-server --save-dev
+npm install http-server -D
+```
+
+---
 
 ## NPM
 
@@ -123,18 +152,93 @@ npm search paket_adi
 
 ---
 
-## Hızlıca Projeyi ayağa kaldırmak istersek yani `npm init -y` yazmadan terminal üzerinden projeyi hızlıca ayağa kaldırmak için kullanılır.
+## Git Init
 
 ```sh
-#### vite
-#### Daha modern ve hızlı:
-npm create vite@latest
-npm create vite@latest -y
+git init
+git add .
+git commit -m "git init data"
+git remote add origin GİTHUB_URL
+git branch
+git push -u origin master
 ```
 
 ---
 
-## Gerekli Kütüphaneler
+## Git Commit
+
+```sh
+git add .
+git commit -m "git init data"
+git push
+git push --fource
+```
+
+---
+
+## Git Clone
+
+```sh
+git clone https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_3_FullStack_3
+
+cd 2025_Ecodation_Frontend_FullStack_33
+npm install
+VEYA
+npm i
+```
+
+---
+
+## Git
+
+```sh
+git config --global user.name "hamitmizrak"
+git config --global user.name
+git config --global user.email "hamitmizrak@gmail.com"
+git config --global user.email
+
+git init
+git add .
+git commit -m "frontend data"
+git remote add origin GİTHUB_URL
+git branch
+git push -u origin master
+
+git remote -v
+git clone https://github.com/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend_FullStack_32
+
+git log
+git reset HEAD~8
+```
+
+## GİT 100MB üstünde veri göndermek
+
+```sh
+# Homebrew (macOS):
+brew install git-lfs
+
+# Debian/Ubuntu:
+sudo apt install git-lfs
+
+# Fedora:
+sudo dnf install git-lfs
+
+# Windows:
+choco install git-lfs   # (Chocolatey yüklü ise)
+
+git lfs install  ==>
+git lfs ls-files ==>
+git lfs track    ==>
+
+git lfs "*.zip"
+git lfs "*.mp4"
+git lfs "*.exe"
+
+```
+
+---
+
+## NPM MANUEL
 
 ```sh
 #### DİKKKKKATTTTT
@@ -242,98 +346,354 @@ npm install --save-dev lite-server
 #### gh-pages
 #### Projeyi GitHub Pages’a deploy etmek için:
 npm install gh-pages
-
-
 ```
 
 ---
 
-## Project Running
+````
+
+---
+
+## Other Keyword
 
 ```sh
-npm run start
-VEYA
-npm start
+-
+````
 
+---
+
+## Other Keyword
+
+```sh
+-
 ```
 
 ---
 
-## Tutorials
+## Other Keyword
 
 ```sh
-https://www.w3schools.com/html/
-
+-
 ```
 
 ---
 
-## Git
+## Other Keyword
 
 ```sh
-git config --global user.name "hamitmizrak"
-git config --global user.name
-git config --global user.email "hamitmizrak@gmail.com"
-git config --global user.email
-
-git init
-git add .
-git commit -m "frontend data"
-git remote add origin GİTHUB_URL
-git branch
-git push -u origin master
-
-git remote -v
-git clone https://github.com/hamitmizrak/https://github.com/hamitmizrak/2025_Ecodation_Frontend2
-
-git log
-git reset HEAD~8
+-
 ```
 
 ---
 
-## GİT 100MB üstünde veri göndermek
+## Other Keyword
 
 ```sh
-# Homebrew (macOS):
-brew install git-lfs
-
-# Debian/Ubuntu:
-sudo apt install git-lfs
-
-# Fedora:
-sudo dnf install git-lfs
-
-# Windows:
-choco install git-lfs   # (Chocolatey yüklü ise)
-
-git lfs install  ==>
-git lfs ls-files ==>
-git lfs track    ==>
-
-git lfs "*.zip"
-git lfs "*.mp4"
-git lfs "*.exe"
-
+-
 ```
 
 ---
 
-## NPM (PACKAGE.JSON)
+## Other Keyword
 
 ```sh
-npm init -y
-npm init
-
+-
 ```
 
 ---
 
-## NPM INSTALL
+## Other Keyword
 
 ```sh
-npm install http-server -g
-npm install http-server --save-dev
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
+```
+
+---
+
+## Other Keyword
+
+```sh
+-
 ```
 
 ---

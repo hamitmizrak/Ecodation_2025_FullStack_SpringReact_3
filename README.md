@@ -44,7 +44,7 @@
 
 ## Project GitHub clone 
 ```sh
-git clone https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3.git 
+git clone https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3
 ```
 ---
 
