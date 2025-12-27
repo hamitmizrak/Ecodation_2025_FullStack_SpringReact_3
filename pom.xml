@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.1</version>
+        <version>3.3.7</version>  <!-- Spring Boot Version: 4.0.1 -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -86,7 +86,6 @@
     </properties>
 
 
-
     <!-- start dependencies-->
     <dependencies>
 
@@ -97,7 +96,7 @@
         </dependency>-->
 
         <!-- #### REDIS #################################################  -->
-       <!-- <dependency>
+       <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
@@ -126,7 +125,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- #### ÖNEMLİ KÜTÜPHANLER #################################################  -->
         <!-- E MAİL-->
@@ -388,8 +387,9 @@
               <scope>runtime</scope>
           </dependency>-->
     </dependencies>
-    <build>
 
+    <!--build-->
+    <build>
         <!--apache tomcat manuel deployment için-->
         <defaultGoal>spring-boot:run</defaultGoal>
         <finalName>${project.artifactId}</finalName>
