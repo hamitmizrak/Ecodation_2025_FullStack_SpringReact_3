@@ -28,7 +28,6 @@ public class BlogCategoryDto extends AuditingAwareBaseDto implements Serializabl
     @Size(min = 3, message = "{blog.category.least.validation.constraints.NotNull.message}")
     private String categoryName;
 
-
     private Date systemCreatedDate;
 
 }
