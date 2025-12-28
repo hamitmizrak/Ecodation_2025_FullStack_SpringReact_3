@@ -6,6 +6,8 @@ import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
 import com.hamitmizrak.data.mapper.BlogCategoryMapper;
 import com.hamitmizrak.data.repository.IBlogCategoryRepository;
+import com.hamitmizrak.exception.HamitMizrakException;
+import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,21 +95,28 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     @Transactional
     public BlogCategoryDto objectServiceCreate(BlogCategoryDto blogCategoryDto) {
         if(blogCategoryDto.getCategoryName()==null || blogCategoryDto.getCategoryName().isBlank()){
-            th
+            throw new HamitMizrakException("Kategori alanı zorunludur.");
         }
-        return null;
+        if(iBlogCategoryRepository.existsByCategoryNameIgnoreCase(blogCategoryDto.getCategoryName())){
+            throw new HamitMizrakException("Kategori zaten var"+  blogCategoryDto.getCategoryName());
+        }
+
+        BlogCategoryEntity blogCategoryEntity = iBlogCategoryRepository.save(dtoToEntity(blogCategoryDto));
+        return  entityToDto(blogCategoryEntity);
     }
 
     // LIST
     @Override
     public List<BlogCategoryDto> objectServiceList() {
-        return List.of();
+        return iBlogCategoryRepository.findAll().stream().map(this::entityToDto).toList();
     }
 
     // FIND (BLOGCATEGORY)
     @Override
     public BlogCategoryDto objectServiceFindById(Long id) {
-        return null;
+        BlogCategoryEntity find= iBlogCategoryRepository.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id +" id'li kategori bulunamadi"));
+        return entityToDto(find);
     }
 
     // UPDATE  (BLOGCATEGORY)
