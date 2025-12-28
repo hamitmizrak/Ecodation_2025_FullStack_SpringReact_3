@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,6 +16,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Log4j2
+
+@Entity
+@Table(name="blog_categories")
 public class BlogCategoryEntity  extends AuditingAwareBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

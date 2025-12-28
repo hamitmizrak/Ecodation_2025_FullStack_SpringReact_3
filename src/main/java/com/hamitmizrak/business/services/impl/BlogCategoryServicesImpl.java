@@ -10,7 +10,6 @@ import com.hamitmizrak.exception.HamitMizrakException;
 import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -123,16 +122,19 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     @Override
     @Transactional
     public BlogCategoryDto objectServiceUpdate(Long id, BlogCategoryDto blogCategoryDto) {
-        return null;
+        // Önce Bul
+        BlogCategoryDto find= objectServiceFindById(id);
+        return entityToDto(iBlogCategoryRepository.save(dtoToEntity(find)));
     }
 
     // DELETE  (BLOGCATEGORY)
     @Override
     @Transactional
     public BlogCategoryDto objectServiceDelete(Long id) {
-        return null;
+        // Önce Bul
+        BlogCategoryDto find= objectServiceFindById(id);
+        iBlogCategoryRepository.deleteById(id);
+        return find;
     }
-
-
 
 } // end class BlogCategoryServicesImpl
