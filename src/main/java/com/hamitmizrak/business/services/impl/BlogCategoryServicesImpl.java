@@ -1,13 +1,16 @@
 package com.hamitmizrak.business.services.impl;
 
+import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.BlogCategoryDto;
 import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
 import com.hamitmizrak.data.mapper.BlogCategoryMapper;
+import com.hamitmizrak.data.repository.IBlogCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,13 +35,16 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     }*/
 
     // 3.YOL
-    private final IBlogCategoryServices<BlogCategoryDto,BlogCategoryEntity> iBlogCategoryServices;
+    private final IBlogCategoryRepository iBlogCategoryRepository;
+
+    private final ModelMapperBean modelMapperBean;
 
     /// ///////////////////////////////////////////////////////////////////////////////
     /// MAPPER
     @Override
     public BlogCategoryDto entityToDto(BlogCategoryEntity blogCategoryEntity) {
         // 1.YOL
+        // return modelMapperBean.modelMapperMethod().map(blogCategoryEntity,BlogCategoryDto.class);
 
         // 2.YOL
         return BlogCategoryMapper.toDto(blogCategoryEntity);
@@ -46,6 +52,10 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
 
     @Override
     public BlogCategoryEntity dtoToEntity(BlogCategoryDto blogCategoryDto) {
+        // 1.YOL
+        // return modelMapperBean.modelMapperMethod().map(blogCategoryDto,BlogCategoryEntity.class);
+
+        // 2.YOL
         return BlogCategoryMapper.toEntiy(blogCategoryDto);
     }
 
@@ -53,38 +63,63 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     /// ///////////////////////////////////////////////////////////////////////////////
     /// SPEED
     @Override
+    @Transactional
     public String categorySpeedData(Integer data) {
-        return "";
+        if(data!=null){
+            for (int i = 1; i <=data ; i++) {
+                BlogCategoryEntity blogCategoryEntity = new BlogCategoryEntity();
+                blogCategoryEntity.setCategoryName("category "+i);
+                iBlogCategoryRepository.save(blogCategoryEntity);
+            }
+        } else{
+            throw  new NullPointerException("Blog categor is null");
+        }
+        return data+" tane blog category oluşturuldu.";
     }
 
+    // DELETE ALL
     @Override
+    @Transactional
     public String categoryDeleteAll() {
-        return "";
+        iBlogCategoryRepository.deleteAll();
+        return "blog category silindi.";
     }
 
     /// ///////////////////////////////////////////////////////////////////////////////
     /// CRUD
+
+    /// CREATE  (BLOGCATEGORY)
     @Override
+    @Transactional
     public BlogCategoryDto objectServiceCreate(BlogCategoryDto blogCategoryDto) {
+        if(blogCategoryDto.getCategoryName()==null || blogCategoryDto.getCategoryName().isBlank()){
+            th
+        }
         return null;
     }
 
+    // LIST
     @Override
     public List<BlogCategoryDto> objectServiceList() {
         return List.of();
     }
 
+    // FIND (BLOGCATEGORY)
     @Override
     public BlogCategoryDto objectServiceFindById(Long id) {
         return null;
     }
 
+    // UPDATE  (BLOGCATEGORY)
     @Override
+    @Transactional
     public BlogCategoryDto objectServiceUpdate(Long id, BlogCategoryDto blogCategoryDto) {
         return null;
     }
 
+    // DELETE  (BLOGCATEGORY)
     @Override
+    @Transactional
     public BlogCategoryDto objectServiceDelete(Long id) {
         return null;
     }
