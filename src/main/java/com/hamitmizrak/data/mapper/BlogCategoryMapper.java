@@ -22,7 +22,7 @@ public class BlogCategoryMapper {
 
 
     // Entity ==> DTO
-    public BlogCategoryEntity toDto(BlogCategoryDto d) {
+    public BlogCategoryEntity toEntiy(BlogCategoryDto d) {
         // Dto boşsa
         if (d == null) return null;
 
