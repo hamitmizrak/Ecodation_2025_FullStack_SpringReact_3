@@ -21,7 +21,7 @@ import java.util.List;
 
 // Asıl  İş Yükünü Yapn Yer
 @Service
-public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCategoryDto, BlogCategoryEntity> {
+public class BlogServicesImpl implements IBlogCategoryServices<BlogCategoryDto, BlogCategoryEntity> {
 
     // Injection
     // 1.YOL

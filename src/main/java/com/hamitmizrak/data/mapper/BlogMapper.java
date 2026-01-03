@@ -1,7 +1,9 @@
 package com.hamitmizrak.data.mapper;
 
 import com.hamitmizrak.business.dto.BlogCategoryDto;
+import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
+import com.hamitmizrak.data.entity.BlogEntity;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -9,27 +11,33 @@ public class BlogMapper {
 
 
     // Entity ==> DTO
-    public BlogCategoryDto toDto(BlogCategoryEntity e) {
+    public BlogDto toDto(BlogEntity e) {
         // Entity boşsa
         if (e == null) return null;
 
-        return BlogCategoryDto.builder()
-                .categoryId(e.getCategoryId())
-                .categoryName(e.getCategoryName())
+        return BlogDto.builder()
+                .blogId(e.getBlogId())
+                .header(e.getHeader())
+                .title(e.getTitle())
+                .content(e.getContent())
+                .image(e.getImage())
                 .systemCreatedDate(e.getSystemCreatedDate())
+                .blogCategoryDto(BlogCategoryMapper.toDto(e.getBlogCategoryEntity()))
                 .build();
     }
 
 
     // Entity ==> DTO
-    public BlogCategoryEntity toEntiy(BlogCategoryDto d) {
+    public BlogEntity toEntiy(BlogDto d) {
         // Dto boşsa
         if (d == null) return null;
 
-        return BlogCategoryEntity.builder()
-                .categoryId(d.getCategoryId())
-                .categoryName(d.getCategoryName())
-                .systemCreatedDate(d.getSystemCreatedDate())
+        return BlogEntity.builder()
+                .blogId(d.getBlogId())
+                .header(d.getHeader())
+                .title(d.getTitle())
+                .content(d.getContent())
+                .image(d.getImage())
                 .build();
     }
 

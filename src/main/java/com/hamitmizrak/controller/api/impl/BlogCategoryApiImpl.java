@@ -33,7 +33,7 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     @Override
     @PostMapping("/speed-data/{count}")
     public ResponseEntity<String> categoryApiSpeedData(@PathVariable("count") Integer data) {
-        return ResponseEntity.ok(iBlogCategoryServices.categorySpeedData(data == null ? 0 : data));
+        return ResponseEntity.ok(iBlogCategoryServices.blogCategorySpeedData(data == null ? 0 : data));
     }
 
 
@@ -41,7 +41,7 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     @Override
     @DeleteMapping("/delete/all")
     public ResponseEntity<String> categoryApiAllDetelete() {
-        return ResponseEntity.ok(iBlogCategoryServices.categoryDeleteAll());
+        return ResponseEntity.ok(iBlogCategoryServices.blogCategoryDeleteAll());
     }
 
     /// CRUD //////////////////////////////////////////////////////////////////////
