@@ -51,21 +51,27 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
         return null;
     }
 
+    // LIST
     @Override
     public ResponseEntity<ApiResult<List<BlogCategoryDto>>> objectApiList() {
         return null;
     }
 
+    // FIND
     @Override
     public ResponseEntity<ApiResult<?>> objectApiFindById(Long id) {
         return null;
     }
 
+
+    // UPDATE
     @Override
     public ResponseEntity<ApiResult<?>> objectApiUpdate(Long id, BlogCategoryDto blogCategoryDto) {
         return null;
     }
 
+
+    // DELETE FIND BY ID
     @Override
     public ResponseEntity<ApiResult<?>> objectApiDelete(Long id) {
         return null;
