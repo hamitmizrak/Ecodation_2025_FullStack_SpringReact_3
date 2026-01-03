@@ -37,7 +37,6 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
 
     // 3.YOL
     private final IBlogCategoryRepository iBlogCategoryRepository;
-
     private final ModelMapperBean modelMapperBean;
 
     /// ///////////////////////////////////////////////////////////////////////////////
@@ -124,6 +123,7 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     public BlogCategoryDto objectServiceUpdate(Long id, BlogCategoryDto blogCategoryDto) {
         // Önce Bul
         BlogCategoryDto find= objectServiceFindById(id);
+        find.setCategoryName(blogCategoryDto.getCategoryName());
         return entityToDto(iBlogCategoryRepository.save(dtoToEntity(find)));
     }
 
