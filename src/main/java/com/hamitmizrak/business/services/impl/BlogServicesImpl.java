@@ -67,6 +67,19 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     }
 
     /// ///////////////////////////////////////////////////////////////////////////////
+    /// VALIDATE
+    private void validate(BlogDto dto,  boolean createing){
+        if(d==null) throw new HamitMizrakException("Blog verisi boş");
+
+        if(createing){
+            if(dto.getHeader()==null || dto.getHeader().isBlank()) throw new HamitMizrakException("Header verisi zorunlu");
+            if(dto.getTitle()==null || dto.getTitle().isBlank()) throw new HamitMizrakException("Title verisi zorunlu");
+            if(dto.getContent()==null || dto.getContent().isBlank()) throw new HamitMizrakException("Contnent verisi zorunlu");
+        }
+    }
+
+
+    /// ///////////////////////////////////////////////////////////////////////////////
     /// CRUD
     /// CREATE  (BLOGCATEGORY)
     @Override
