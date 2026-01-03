@@ -33,7 +33,7 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     @Override
     @PostMapping("/speed-data/{count}")
     public ResponseEntity<String> categoryApiSpeedData(@PathVariable("count") Integer data) {
-        return ResponseEntity.ok(iBlogCategoryServices.categorySpeedData(data==null ? 0 :data));
+        return ResponseEntity.ok(iBlogCategoryServices.categorySpeedData(data == null ? 0 : data));
     }
 
 
@@ -50,12 +50,11 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     @Override
     @PostMapping("/create")
     public ResponseEntity<ApiResult<?>> objectApiCreate(@Valid @RequestBody BlogCategoryDto blogCategoryDto) {
-        try{
-
-        }catch (Exception e){
-            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/create"));
+        try {
+            return ResponseEntity.ok(ApiResult.success(iBlogCategoryServices.objectServiceCreate(blogCategoryDto)));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/category/api/v1.0.0/create"));
         }
-        return null;
     }
 
     // LIST
@@ -63,12 +62,11 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     @Override
     @GetMapping("/list")
     public ResponseEntity<ApiResult<List<BlogCategoryDto>>> objectApiList() {
-        try{
-
-        }catch (Exception e){
-            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/list"));
+        try {
+            return ResponseEntity.ok(ApiResult.success(iBlogCategoryServices.objectServiceList()));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/category/api/v1.0.0/list"));
         }
-        return null;
     }
 
     // FIND
@@ -76,12 +74,11 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     @Override
     @GetMapping("/find/{id}")
     public ResponseEntity<ApiResult<?>> objectApiFindById(@PathVariable("id") Long id) {
-        try{
-
-        }catch (Exception e){
-            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/find/"+id));
+        try {
+            return ResponseEntity.ok(ApiResult.success(iBlogCategoryServices.objectServiceFindById(id)));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/category/api/v1.0.0/find/" + id));
         }
-        return null;
     }
 
 
@@ -89,13 +86,12 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     //  http://localhost:4444/blog/category/api/v1.0.0/update/1
     @Override
     @PutMapping("/update/{id}")
-    public ResponseEntity<ApiResult<?>> objectApiUpdate(@PathVariable("id")  Long id, @Valid @RequestBody BlogCategoryDto blogCategoryDto) {
-        try{
-
-        }catch (Exception e){
-            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/update/"+id));
+    public ResponseEntity<ApiResult<?>> objectApiUpdate(@PathVariable("id") Long id, @Valid @RequestBody BlogCategoryDto blogCategoryDto) {
+        try {
+            return ResponseEntity.ok(ApiResult.success(iBlogCategoryServices.objectServiceUpdate(id, blogCategoryDto)));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/category/api/v1.0.0/update/" + id));
         }
-        return null;
     }
 
 
@@ -103,12 +99,11 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     //  http://localhost:4444/blog/category/api/v1.0.0/delete/1
     @Override
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ApiResult<?>> objectApiDelete(@PathVariable("id")  Long id) {
-        try{
-
-        }catch (Exception e){
-            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/delete/"+id));
+    public ResponseEntity<ApiResult<?>> objectApiDelete(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(ApiResult.success(iBlogCategoryServices.objectServiceDelete(id)));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/category/api/v1.0.0/delete/" + id));
         }
-        return null;
     }
 } //end BlogCategoryApiImpl
