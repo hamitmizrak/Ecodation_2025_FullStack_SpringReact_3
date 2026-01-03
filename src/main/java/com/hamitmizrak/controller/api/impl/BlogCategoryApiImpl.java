@@ -6,6 +6,7 @@ import com.hamitmizrak.controller.api.interfaces.IBlogCategoryApi;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
 import com.hamitmizrak.error.ApiResult;
 import com.hamitmizrak.utily.FrontEnd;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,6 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
 
 
     /// ALL SPEED- DELETE//////////////////////////////////////////////////////////////
-
     // http://localhost:4444//blog/category/api/v1.0.0/speed-data/12
     @Override
     @PostMapping("/speed-data/{count}")
@@ -46,34 +46,44 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
 
     /// CRUD //////////////////////////////////////////////////////////////////////
     /// CREATE
+    //  http://localhost:4444//blog/category/api/v1.0.0/create
     @Override
-    public ResponseEntity<ApiResult<?>> objectApiCreate(BlogCategoryDto blogCategoryDto) {
+    @PostMapping("/create")
+    public ResponseEntity<ApiResult<?>> objectApiCreate(@Valid @RequestBody BlogCategoryDto blogCategoryDto) {
         return null;
     }
 
     // LIST
+    //  http://localhost:4444//blog/category/api/v1.0.0/list
     @Override
+    @GetMapping("/list")
     public ResponseEntity<ApiResult<List<BlogCategoryDto>>> objectApiList() {
         return null;
     }
 
     // FIND
+    //  http://localhost:4444//blog/category/api/v1.0.0/find/1
     @Override
-    public ResponseEntity<ApiResult<?>> objectApiFindById(Long id) {
+    @GetMapping("/find/{id}")
+    public ResponseEntity<ApiResult<?>> objectApiFindById(@PathVariable("id") Long id) {
         return null;
     }
 
 
     // UPDATE
+    //  http://localhost:4444//blog/category/api/v1.0.0/update/1
     @Override
-    public ResponseEntity<ApiResult<?>> objectApiUpdate(Long id, BlogCategoryDto blogCategoryDto) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ApiResult<?>> objectApiUpdate(@PathVariable("id")  Long id, @Valid @RequestBody BlogCategoryDto blogCategoryDto) {
         return null;
     }
 
 
     // DELETE FIND BY ID
+    //  http://localhost:4444//blog/category/api/v1.0.0/delete/1
     @Override
-    public ResponseEntity<ApiResult<?>> objectApiDelete(Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResult<?>> objectApiDelete(@PathVariable("id")  Long id) {
         return null;
     }
 } //end BlogCategoryApiImpl
