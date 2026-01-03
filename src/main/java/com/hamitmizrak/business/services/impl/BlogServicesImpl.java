@@ -1,11 +1,14 @@
 package com.hamitmizrak.business.services.impl;
 
 import com.hamitmizrak.bean.ModelMapperBean;
-import com.hamitmizrak.business.dto.BlogCategoryDto;
+import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
+import com.hamitmizrak.business.services.interfaces.IBlogServices;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
-import com.hamitmizrak.data.mapper.BlogCategoryMapper;
+import com.hamitmizrak.data.entity.BlogEntity;
+import com.hamitmizrak.data.mapper.BlogMapper;
 import com.hamitmizrak.data.repository.IBlogCategoryRepository;
+import com.hamitmizrak.data.repository.IBlogRepository;
 import com.hamitmizrak.exception.HamitMizrakException;
 import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,42 +24,30 @@ import java.util.List;
 
 // Asıl  İş Yükünü Yapn Yer
 @Service
-public class BlogServicesImpl implements IBlogCategoryServices<BlogCategoryDto, BlogCategoryEntity> {
+public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
 
     // Injection
-    // 1.YOL
-    /*@Autowired
-    private final IBlogCategoryServices iBlogCategoryServices;*/
-
-    // 2.YOL
-    /*private final IBlogCategoryServices iBlogCategoryServices;
-    @Autowired
-    public BlogCategoryServicesImpl(IBlogCategoryServices iBlogCategoryServices) {
-        this.iBlogCategoryServices = iBlogCategoryServices;
-    }*/
-
-    // 3.YOL
+    private final IBlogRepository iBlogRepository;
     private final IBlogCategoryRepository iBlogCategoryRepository;
-    private final ModelMapperBean modelMapperBean;
 
     /// ///////////////////////////////////////////////////////////////////////////////
     /// MAPPER
     @Override
-    public BlogCategoryDto entityToDto(BlogCategoryEntity blogCategoryEntity) {
+    public BlogDto entityToDto(BlogEntity e) {
         // 1.YOL
-        // return modelMapperBean.modelMapperMethod().map(blogCategoryEntity,BlogCategoryDto.class);
+        // return modelMapperBean.modelMapperMethod().map(e,BlogDto.class);
 
         // 2.YOL
-        return BlogCategoryMapper.toDto(blogCategoryEntity);
+        return BlogMapper.toDto(e);
     }
 
     @Override
-    public BlogCategoryEntity dtoToEntity(BlogCategoryDto blogCategoryDto) {
+    public BlogEntity dtoToEntity(BlogDto d) {
         // 1.YOL
-        // return modelMapperBean.modelMapperMethod().map(blogCategoryDto,BlogCategoryEntity.class);
+        // return modelMapperBean.modelMapperMethod().map(BlogDto,BlogEntity.class);
 
         // 2.YOL
-        return BlogCategoryMapper.toEntiy(blogCategoryDto);
+        return BlogMapper.toEntiy(d);
     }
 
 
@@ -64,55 +55,48 @@ public class BlogServicesImpl implements IBlogCategoryServices<BlogCategoryDto, 
     /// SPEED
     @Override
     @Transactional
-    public String blogCategorySpeedData(Integer data) {
-        if(data!=null){
-            for (int i = 1; i <=data ; i++) {
-                BlogCategoryEntity blogCategoryEntity = new BlogCategoryEntity();
-                blogCategoryEntity.setCategoryName("category "+i);
-                iBlogCategoryRepository.save(blogCategoryEntity);
-            }
-        } else{
-            throw  new NullPointerException("Blog categor is null");
-        }
+    public String blogSpeedData(Integer data) {
         return data+" tane blog category oluşturuldu.";
     }
 
     // DELETE ALL
     @Override
     @Transactional
-    public String blogCategoryDeleteAll() {
-        iBlogCategoryRepository.deleteAll();
+    public String blogDeleteAll() {
         return "blog category silindi.";
     }
 
     /// ///////////////////////////////////////////////////////////////////////////////
     /// CRUD
-
     /// CREATE  (BLOGCATEGORY)
     @Override
     @Transactional
-    public BlogCategoryDto objectServiceCreate(BlogCategoryDto blogCategoryDto) {
-        if(blogCategoryDto.getCategoryName()==null || blogCategoryDto.getCategoryName().isBlank()){
-            throw new HamitMizrakException("Kategori alanı zorunludur.");
-        }
-        if(iBlogCategoryRepository.existsByCategoryNameIgnoreCase(blogCategoryDto.getCategoryName())){
-            throw new HamitMizrakException("Kategori zaten var"+  blogCategoryDto.getCategoryName());
-        }
+    public BlogDto objectServiceCreate(BlogDto d) {
+        validate(d,true);
 
-        BlogCategoryEntity blogCategoryEntity = iBlogCategoryRepository.save(dtoToEntity(blogCategoryDto));
-        return  entityToDto(blogCategoryEntity);
+        // Kategori Bul
+        Long catId= d.getBlogCategoryDto()!=null ? d.getBlogCategoryDto().getCategoryId():null;
+        if(catId==null)throw  new HamitMizrakException("Kategori Seçiniz");
+
+        BlogCategoryEntity blogCategoryEntity=iBlogCategoryRepository.findById(catId).orElseThrow(()-> new _404_NotFoundException(catId+ " id'li kategori bulunamadı"));
+
+        BlogEntity blogEntity = dtoToEntity(d);
+        blogEntity.setBlogCategoryEntity(blogCategoryEntity);
+
+        BlogEntity saved= iBlogRepository.save(blogEntity);
+        return  entityToDto(saved);
     }
 
     // LIST
     @Override
-    public List<BlogCategoryDto> objectServiceList() {
-        return iBlogCategoryRepository.findAll().stream().map(this::entityToDto).toList();
+    public List<BlogDto> objectServiceList() {
+        return iBlogServices.findAll().stream().map(this::entityToDto).toList();
     }
 
     // FIND (BLOGCATEGORY)
     @Override
-    public BlogCategoryDto objectServiceFindById(Long id) {
-        BlogCategoryEntity find= iBlogCategoryRepository.findById(id)
+    public BlogDto objectServiceFindById(Long id) {
+        BlogEntity find= iBlogServices.findById(id)
                 .orElseThrow(() -> new _404_NotFoundException(id +" id'li kategori bulunamadi"));
         return entityToDto(find);
     }
@@ -120,20 +104,20 @@ public class BlogServicesImpl implements IBlogCategoryServices<BlogCategoryDto, 
     // UPDATE  (BLOGCATEGORY)
     @Override
     @Transactional
-    public BlogCategoryDto objectServiceUpdate(Long id, BlogCategoryDto blogCategoryDto) {
+    public BlogDto objectServiceUpdate(Long id, BlogDto d) {
         // Önce Bul
-        BlogCategoryDto find= objectServiceFindById(id);
-        find.setCategoryName(blogCategoryDto.getCategoryName());
-        return entityToDto(iBlogCategoryRepository.save(dtoToEntity(find)));
+        d find= objectServiceFindById(id);
+        find.setCategoryName(d.getCategoryName());
+        return entityToDto(iBlogServices.save(dtoToEntity(find)));
     }
 
     // DELETE  (BLOGCATEGORY)
     @Override
     @Transactional
-    public BlogCategoryDto objectServiceDelete(Long id) {
+    public BlogDto objectServiceDelete(Long id) {
         // Önce Bul
-        BlogCategoryDto find= objectServiceFindById(id);
-        iBlogCategoryRepository.deleteById(id);
+        BlogDto find= objectServiceFindById(id);
+        iBlogServices.deleteById(id);
         return find;
     }
 
