@@ -29,7 +29,7 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
 
 
     /// ALL SPEED- DELETE//////////////////////////////////////////////////////////////
-    // http://localhost:4444//blog/category/api/v1.0.0/speed-data/12
+    // http://localhost:4444/blog/category/api/v1.0.0/speed-data/12
     @Override
     @PostMapping("/speed-data/{count}")
     public ResponseEntity<String> categoryApiSpeedData(@PathVariable("count") Integer data) {
@@ -37,7 +37,7 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     }
 
 
-    // http://localhost:4444//blog/category/api/v1.0.0/delete/all
+    // http://localhost:4444/blog/category/api/v1.0.0/delete/all
     @Override
     @DeleteMapping("/delete/all")
     public ResponseEntity<String> categoryApiAllDetelete() {
@@ -46,44 +46,69 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
 
     /// CRUD //////////////////////////////////////////////////////////////////////
     /// CREATE
-    //  http://localhost:4444//blog/category/api/v1.0.0/create
+    //  http://localhost:4444/blog/category/api/v1.0.0/create
     @Override
     @PostMapping("/create")
     public ResponseEntity<ApiResult<?>> objectApiCreate(@Valid @RequestBody BlogCategoryDto blogCategoryDto) {
+        try{
+
+        }catch (Exception e){
+            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/create"));
+        }
         return null;
     }
 
     // LIST
-    //  http://localhost:4444//blog/category/api/v1.0.0/list
+    //  http://localhost:4444/blog/category/api/v1.0.0/list
     @Override
     @GetMapping("/list")
     public ResponseEntity<ApiResult<List<BlogCategoryDto>>> objectApiList() {
+        try{
+
+        }catch (Exception e){
+            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/list"));
+        }
         return null;
     }
 
     // FIND
-    //  http://localhost:4444//blog/category/api/v1.0.0/find/1
+    //  http://localhost:4444/blog/category/api/v1.0.0/find/1
     @Override
     @GetMapping("/find/{id}")
     public ResponseEntity<ApiResult<?>> objectApiFindById(@PathVariable("id") Long id) {
+        try{
+
+        }catch (Exception e){
+            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/find/"+id));
+        }
         return null;
     }
 
 
     // UPDATE
-    //  http://localhost:4444//blog/category/api/v1.0.0/update/1
+    //  http://localhost:4444/blog/category/api/v1.0.0/update/1
     @Override
     @PutMapping("/update/{id}")
     public ResponseEntity<ApiResult<?>> objectApiUpdate(@PathVariable("id")  Long id, @Valid @RequestBody BlogCategoryDto blogCategoryDto) {
+        try{
+
+        }catch (Exception e){
+            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/update/"+id));
+        }
         return null;
     }
 
 
     // DELETE FIND BY ID
-    //  http://localhost:4444//blog/category/api/v1.0.0/delete/1
+    //  http://localhost:4444/blog/category/api/v1.0.0/delete/1
     @Override
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ApiResult<?>> objectApiDelete(@PathVariable("id")  Long id) {
+        try{
+
+        }catch (Exception e){
+            return ResponseEntity.ok(ApiResult.error("serverError",e.getMessage(),"/blog/category/api/v1.0.0/delete/"+id));
+        }
         return null;
     }
 } //end BlogCategoryApiImpl
