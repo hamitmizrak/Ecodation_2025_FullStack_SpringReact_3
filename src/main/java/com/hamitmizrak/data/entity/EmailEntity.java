@@ -1,6 +1,6 @@
 package com.hamitmizrak.data.entity;
 
-import com.hamitmizrak.data.entity.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;

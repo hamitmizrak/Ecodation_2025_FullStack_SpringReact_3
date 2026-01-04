@@ -1,8 +1,9 @@
 package com.hamitmizrak.business.services.impl;
 
-import com.hamitmizrak.token_mail.entity.ForRegisterTokenEmailConfirmationEntity;
-import com.hamitmizrak.token_mail.interfaces.ITokenEmail;
-import com.hamitmizrak.token_mail.repository.IForRegisterTokenEmailConfirmationEntity;
+
+import com.hamitmizrak.business.services.interfaces.ITokenEmail;
+import com.hamitmizrak.data.entity.ForRegisterTokenEmailConfirmationEntity;
+import com.hamitmizrak.data.repository.IForRegisterTokenEmailConfirmationEntity;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

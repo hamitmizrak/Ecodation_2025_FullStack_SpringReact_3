@@ -1,16 +1,16 @@
 package com.hamitmizrak.bean;
 
-/*import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import java.util.Properties;*/
+import java.util.Properties;
 
-//@Configuration
+@Configuration
 public class MailConfig {
 
-   /* @Bean
+    @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
@@ -23,7 +23,7 @@ public class MailConfig {
         props.put("mail.smtp.starttls.enable", "true");
 
         return mailSender;
-    }*/
+    }
 }
 
 

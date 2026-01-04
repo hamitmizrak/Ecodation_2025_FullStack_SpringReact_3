@@ -3,8 +3,8 @@ package com.hamitmizrak.business.services.interfaces;
 // D: Dto
 // E: Entity
 
+import com.hamitmizrak.business.dto.EmailDto;
 import com.hamitmizrak.business.services.IModelMapperService;
-import com.hamitmizrak.token_mail.dto.EmailDto;
 
 // Email
 public interface IEmailServices<D, E> extends IModelMapperService<D, E> {

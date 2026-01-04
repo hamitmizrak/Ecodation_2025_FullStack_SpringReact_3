@@ -1,6 +1,6 @@
 package com.hamitmizrak.data.repository;
 
-import com.hamitmizrak.token_mail.entity.EmailEntity;
+import com.hamitmizrak.data.entity.EmailEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,7 @@
 package com.hamitmizrak.data.repository;
 
-import com.hamitmizrak.token_mail.entity.ForRegisterTokenEmailConfirmationEntity;
+
+import com.hamitmizrak.data.entity.ForRegisterTokenEmailConfirmationEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
