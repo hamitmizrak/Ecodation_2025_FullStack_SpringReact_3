@@ -7,6 +7,7 @@ import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
 import com.hamitmizrak.business.services.interfaces.IBlogServices;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
 import com.hamitmizrak.data.entity.BlogEntity;
+import com.hamitmizrak.data.mapper.BlogCategoryMapper;
 import com.hamitmizrak.data.mapper.BlogMapper;
 import com.hamitmizrak.data.repository.IBlogCategoryRepository;
 import com.hamitmizrak.data.repository.IBlogRepository;
@@ -111,22 +112,37 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
                 .toList();
     }
 
-    // FIND (BLOG-CATEGORY)
+    // FIND (BLOG)
     @Override
     public BlogDto objectServiceFindById(Long id) {
-        BlogCategoryEntity find= iBlogCategoryRepository.findById(id)
-                .orElseThrow(() -> new _404_NotFoundException(id +" id'li kategori bulunamadi"));
+        BlogEntity find= iBlogRepository.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id +" id'li blog bulunamadi"));
         return entityToDto(find);
     }
 
     // UPDATE (BLOG)
     @Override
     @Transactional
-    public BlogDto objectServiceUpdate(Long id, BlogDto blogCategoryDto) {
+    public BlogDto objectServiceUpdate(Long id, BlogDto d) {
         // Önce Bul
-        BlogDto find= objectServiceFindById(id);
-        find.setCategoryName(blogCategoryDto.getCategoryName());
-        return entityToDto(iBlogCategoryRepository.save(dtoToEntity(find)));
+        // BlogDto find= objectServiceFindById(id);
+        BlogEntity find= iBlogRepository.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id +" id'li blog bulunamadi"));
+
+        // Alan bazlı güncelleme
+        if(d.getHeader()!=null && !d.getHeader().isBlank()) find.setHeader(d.getHeader());
+        if(d.getTitle()!=null && !d.getTitle().isBlank()) find.setTitle(d.getTitle());
+        if(d.getContent()!=null && !d.getContent().isBlank()) find.setContent(d.getContent());
+        if(d.getImage()!=null && !d.getImage().isBlank()) find.setImage(d.getImage());
+
+        // Kategori Değişimi
+        if(d.getBlogCategoryDto()!=null && d.getBlogCategoryDto().getCategoryId()!=null){
+            Long  catId= d.getBlogCategoryDto().getCategoryId();
+            BlogCategoryEntity blogCategoryEntity= iBlogCategoryRepository.findById(catId).orElseThrow(()-> new _404_NotFoundException(catId+" id'li kategori bulunamadı"));
+            find.setBlogCategoryEntity(blogCategoryEntity);
+        }
+
+        return entityToDto(iBlogRepository.save(find));
     }
 
     // DELETE (BLOG)
