@@ -1,6 +1,7 @@
 package com.hamitmizrak.business.services.impl;
 
 import com.hamitmizrak.bean.ModelMapperBean;
+import com.hamitmizrak.business.dto.BlogCategoryDto;
 import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
 import com.hamitmizrak.business.services.interfaces.IBlogServices;
@@ -99,16 +100,21 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
         return  entityToDto(saved);
     }
 
+
     // LIST (BLOG)
     @Override
     public List<BlogDto> objectServiceList() {
-        return iBlogServices.findAll().stream().map(this::entityToDto).toList();
+        return iBlogRepository
+                .findAll()
+                .stream()
+                .map(this::entityToDto)
+                .toList();
     }
 
-    // FIND (BLOGCATEGORY)
+    // FIND (BLOG-CATEGORY)
     @Override
     public BlogDto objectServiceFindById(Long id) {
-        BlogEntity find= iBlogServices.findById(id)
+        BlogCategoryEntity find= iBlogCategoryRepository.findById(id)
                 .orElseThrow(() -> new _404_NotFoundException(id +" id'li kategori bulunamadi"));
         return entityToDto(find);
     }
@@ -116,11 +122,11 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // UPDATE (BLOG)
     @Override
     @Transactional
-    public BlogDto objectServiceUpdate(Long id, BlogDto d) {
+    public BlogDto objectServiceUpdate(Long id, BlogDto blogCategoryDto) {
         // Önce Bul
-        d find= objectServiceFindById(id);
-        find.setCategoryName(d.getCategoryName());
-        return entityToDto(iBlogServices.save(dtoToEntity(find)));
+        BlogDto find= objectServiceFindById(id);
+        find.setCategoryName(blogCategoryDto.getCategoryName());
+        return entityToDto(iBlogCategoryRepository.save(dtoToEntity(find)));
     }
 
     // DELETE (BLOG)
@@ -128,9 +134,8 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     @Transactional
     public BlogDto objectServiceDelete(Long id) {
         // Önce Bul
-        BlogDto find= objectServiceFindById(id);
-        iBlogServices.deleteById(id);
+        BlogCategoryDto find= objectServiceFindById(id);
+        iBlogCategoryRepository.deleteById(id);
         return find;
     }
-
 } // end class BlogCategoryServicesImpl
