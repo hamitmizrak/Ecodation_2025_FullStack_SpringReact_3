@@ -1,6 +1,5 @@
 package com.hamitmizrak.controller.api.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.business.services.interfaces.IBlogServices;
@@ -70,7 +69,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     //  http://localhost:4444/blog/api/v1.0.0/create
     @Override
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ApiResult<?>> objectApiCreateMultipart(@RequestPart("blog") String json, @RequestParam(value = "file", required = false) MultipartFile file) throws JsonProcessingException {
+    public ResponseEntity<ApiResult<?>> objectApiCreateMultipart(@RequestPart("blog") String json, @RequestPart(value = "file", required = false) MultipartFile file) {
         try {
             BlogDto blogDto = objectMapper.readValue(json, BlogDto.class);
             if (file != null && !file.isEmpty()) {
@@ -112,10 +111,10 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
 
 
     /// /////////////////////////////////////////////////////////////////////////////////
-    // UPDATE
+    // UPDATE (JSON RESIMSIZ)
     //  http://localhost:4444/blog/api/v1.0.0/update/1
     @Override
-    @PutMapping("/update/{id}")
+    @PutMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResult<?>> objectApiUpdate(@PathVariable("id") Long id, @Valid @RequestBody BlogDto blogDto) {
         try {
             return ResponseEntity.ok(ApiResult.success(iBlogServices.objectServiceUpdate(id, blogDto)));
@@ -126,9 +125,38 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
 
 
     /// UPDATE (RESIMLI)
+    //  http://localhost:4444/blog/api/v1.0.0/update/1
     @Override
-    public ResponseEntity<ApiResult<?>> objectApiUpdateMultipart(Long id, BlogDto blogDto, MultipartFile file) {
-        return null;
+    @PutMapping(value = "/update/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResult<?>> objectApiUpdateMultipart(
+            @PathVariable("id") Long id,
+            @Valid @RequestPart("blog") BlogDto blogDto,
+            @RequestPart(name = "file", required = false) MultipartFile file) {
+
+        try {
+            // Mevcut kayıt gelsin (Eski image)
+            BlogDto current = iBlogServices.objectServiceFindById(id);
+            String oldUrl = current != null ? current.getImage() : null;
+
+            if (file != null && !file.isEmpty()) {
+                String relative = imageService.saveBlogImage(file);
+                blogDto.setImage(relative);
+            }
+
+            BlogDto updated = iBlogServices.objectServiceUpdate(id, blogDto);
+
+            // Eğer yeni resim yüklendiyse ve eski /upload farklıysa eskiyi sil
+            if (file != null && !file.isEmpty() && oldUrl != null && !oldUrl.equals(updated.getImage())) {
+                try {
+                    imageService.deleteByUrl(oldUrl);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return ResponseEntity.ok(ApiResult.success(updated));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/api/v1.0.0/update/" + id));
+        }
     }
 
 
