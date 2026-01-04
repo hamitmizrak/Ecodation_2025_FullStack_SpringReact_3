@@ -1,20 +1,18 @@
 package com.hamitmizrak.business.dto;
 
-import com.hamitmizrak.annotation.AnnotationUniqueRoleName;
 import com.hamitmizrak.audit.AuditingAwareBaseDto;
 import com.hamitmizrak.business.role.ERole;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.Serializable;
 import java.util.Date;
 
 // LOMBOK
-@Data // @Setter @Getter
+//@Data // @Setter @Getter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Log4j2
@@ -33,7 +31,7 @@ public class RoleDto extends AuditingAwareBaseDto implements Serializable {
     // Validation
     @NotEmpty(message = "{role.name.validation.constraints.NotNull.message}")
     // Annotation kullanmalısın cunku database aynı role adında olmaması gerekiyor (unique)
-    @AnnotationUniqueRoleName
+    //@AnnotationUniqueRoleName
     @Builder.Default
     private String roleName= ERole.USER.toString();
 
