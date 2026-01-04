@@ -1,18 +1,15 @@
 package com.hamitmizrak.business.services.impl;
 
-import com.hamitmizrak.bean.ModelMapperBean;
-import com.hamitmizrak.business.dto.BlogCategoryDto;
 import com.hamitmizrak.business.dto.BlogDto;
-import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
 import com.hamitmizrak.business.services.interfaces.IBlogServices;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
 import com.hamitmizrak.data.entity.BlogEntity;
-import com.hamitmizrak.data.mapper.BlogCategoryMapper;
 import com.hamitmizrak.data.mapper.BlogMapper;
 import com.hamitmizrak.data.repository.IBlogCategoryRepository;
 import com.hamitmizrak.data.repository.IBlogRepository;
 import com.hamitmizrak.exception.HamitMizrakException;
 import com.hamitmizrak.exception._404_NotFoundException;
+import com.hamitmizrak.file_upload.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -31,6 +28,9 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // Injection
     private final IBlogRepository iBlogRepository;
     private final IBlogCategoryRepository iBlogCategoryRepository;
+
+    // Resim silmesinde dosya temizliği için kullanmak
+    private final ImageService imageService;
 
     /// ///////////////////////////////////////////////////////////////////////////////
     /// MAPPER
@@ -65,15 +65,16 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     @Override
     @Transactional
     public String blogDeleteAll() {
+        iBlogRepository.deleteAll();
         return "blog category silindi.";
     }
 
     /// ///////////////////////////////////////////////////////////////////////////////
     /// VALIDATE
-    private void validate(BlogDto dto,  boolean createing){
-        if(d==null) throw new HamitMizrakException("Blog verisi boş");
+    private void validate(BlogDto dto,  boolean creating){
+        if(dto==null) throw new HamitMizrakException("Blog verisi boş");
 
-        if(createing){
+        if(creating){
             if(dto.getHeader()==null || dto.getHeader().isBlank()) throw new HamitMizrakException("Header verisi zorunlu");
             if(dto.getTitle()==null || dto.getTitle().isBlank()) throw new HamitMizrakException("Title verisi zorunlu");
             if(dto.getContent()==null || dto.getContent().isBlank()) throw new HamitMizrakException("Contnent verisi zorunlu");
@@ -150,8 +151,22 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     @Transactional
     public BlogDto objectServiceDelete(Long id) {
         // Önce Bul
-        BlogCategoryDto find= objectServiceFindById(id);
-        iBlogCategoryRepository.deleteById(id);
-        return find;
+        //BlogDto find= objectServiceFindById(id);
+        BlogEntity find= iBlogRepository.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id +" id'li blog bulunamadi"));
+
+        // Kayıtlı ilişkili dosya varsa sil
+        String img= find.getImage();
+        if(img!=null && img.startsWith("/upload/")){
+            try {
+                imageService.deleteByUrl(img);
+            }catch (Exception e){
+                System.out.println("Resim silmeden bir hata meydana geldi "+e.getMessage());
+            }
+        }
+
+        BlogDto blogDto = entityToDto(find);
+        iBlogRepository.deleteById(id);
+        return blogDto;
     }
 } // end class BlogCategoryServicesImpl
