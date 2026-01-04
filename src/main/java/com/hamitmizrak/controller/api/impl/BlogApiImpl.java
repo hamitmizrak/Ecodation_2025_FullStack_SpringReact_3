@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -49,8 +50,9 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
         return ResponseEntity.ok(iBlogServices.blogDeleteAll());
     }
 
+
     /// CRUD //////////////////////////////////////////////////////////////////////
-    /// CREATE
+    /// CREATE (JSON RESIMSIZ)
     //  http://localhost:4444/blog/api/v1.0.0/create
     @Override
     @PostMapping(value = "/create",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -61,6 +63,15 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
             return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/api/v1.0.0/create"));
         }
     }
+
+
+    /// CREATE (RESIMLI)
+    //  http://localhost:4444/blog/api/v1.0.0/create
+    @Override
+    public ResponseEntity<ApiResult<?>> objectApiCreateMultipart(String json, MultipartFile file) {
+        return null;
+    }
+    /// /////////////////////////////////////////////////////////////////////////////////
 
     // LIST
     //  http://localhost:4444/blog/api/v1.0.0/list
@@ -87,6 +98,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     }
 
 
+    /// /////////////////////////////////////////////////////////////////////////////////
     // UPDATE
     //  http://localhost:4444/blog/api/v1.0.0/update/1
     @Override
@@ -97,6 +109,13 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
         } catch (Exception e) {
             return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/api/v1.0.0/update/" + id));
         }
+    }
+
+
+    /// UPDATE (RESIMLI)
+    @Override
+    public ResponseEntity<ApiResult<?>> objectApiUpdateMultipart(Long id, BlogDto blogDto, MultipartFile file) {
+        return null;
     }
 
 
