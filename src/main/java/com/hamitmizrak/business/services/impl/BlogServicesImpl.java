@@ -78,10 +78,9 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
         }
     }
 
-
     /// ///////////////////////////////////////////////////////////////////////////////
     /// CRUD
-    /// CREATE  (BLOGCATEGORY)
+    /// CREATE (BLOG)
     @Override
     @Transactional
     public BlogDto objectServiceCreate(BlogDto d) {
@@ -100,7 +99,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
         return  entityToDto(saved);
     }
 
-    // LIST
+    // LIST (BLOG)
     @Override
     public List<BlogDto> objectServiceList() {
         return iBlogServices.findAll().stream().map(this::entityToDto).toList();
@@ -114,7 +113,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
         return entityToDto(find);
     }
 
-    // UPDATE  (BLOGCATEGORY)
+    // UPDATE (BLOG)
     @Override
     @Transactional
     public BlogDto objectServiceUpdate(Long id, BlogDto d) {
@@ -124,7 +123,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
         return entityToDto(iBlogServices.save(dtoToEntity(find)));
     }
 
-    // DELETE  (BLOGCATEGORY)
+    // DELETE (BLOG)
     @Override
     @Transactional
     public BlogDto objectServiceDelete(Long id) {

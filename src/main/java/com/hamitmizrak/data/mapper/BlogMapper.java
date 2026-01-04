@@ -1,14 +1,11 @@
 package com.hamitmizrak.data.mapper;
 
-import com.hamitmizrak.business.dto.BlogCategoryDto;
 import com.hamitmizrak.business.dto.BlogDto;
-import com.hamitmizrak.data.entity.BlogCategoryEntity;
 import com.hamitmizrak.data.entity.BlogEntity;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class BlogMapper {
-
 
     // Entity ==> DTO
     public BlogDto toDto(BlogEntity e) {
@@ -26,7 +23,6 @@ public class BlogMapper {
                 .build();
     }
 
-
     // Entity ==> DTO
     public BlogEntity toEntiy(BlogDto d) {
         // Dto boşsa
@@ -41,4 +37,4 @@ public class BlogMapper {
                 .build();
     }
 
-}
+} //end BlogMapper

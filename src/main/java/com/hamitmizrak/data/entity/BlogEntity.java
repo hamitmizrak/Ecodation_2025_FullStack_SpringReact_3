@@ -8,6 +8,7 @@ import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,29 +20,37 @@ import java.util.Date;
 @Builder
 @Log4j2
 
+//DATAS
 @Entity
-@Table(name="blog")
+@Table(name="blogs")
 //Blog(N) - BlogCategory(1)
 public class BlogEntity extends AuditingAwareBaseEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     // Field
+
+    // ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long blogId;
 
-
+    // HEADER
     @Column(nullable = false, unique = true,length = 400,name = "header")
     private String header;
 
+    // TITLE
     private String title;
 
+    // CONTENT
     @Column(nullable = false)
     private String content;
 
+    // IMAGE
     private String image;
 
+    // SYSTEM DATE
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date systemCreatedDate;

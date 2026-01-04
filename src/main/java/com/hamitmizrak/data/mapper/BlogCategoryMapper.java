@@ -21,7 +21,7 @@ public class BlogCategoryMapper {
     }
 
 
-    // Entity ==> DTO
+    // DTO ==> Entity
     public BlogCategoryEntity toEntiy(BlogCategoryDto d) {
         // Dto boşsa
         if (d == null) return null;
@@ -33,4 +33,4 @@ public class BlogCategoryMapper {
                 .build();
     }
 
-}
+} //end BlogCategoryMapper
