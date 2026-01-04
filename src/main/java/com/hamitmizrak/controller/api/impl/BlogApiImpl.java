@@ -1,5 +1,6 @@
 package com.hamitmizrak.controller.api.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.business.services.interfaces.IBlogServices;
@@ -55,7 +56,7 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     /// CREATE (JSON RESIMSIZ)
     //  http://localhost:4444/blog/api/v1.0.0/create
     @Override
-    @PostMapping(value = "/create",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResult<?>> objectApiCreate(@Valid @RequestBody BlogDto blogDto) {
         try {
             return ResponseEntity.ok(ApiResult.success(iBlogServices.objectServiceCreate(blogDto)));
@@ -68,9 +69,20 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     /// CREATE (RESIMLI)
     //  http://localhost:4444/blog/api/v1.0.0/create
     @Override
-    public ResponseEntity<ApiResult<?>> objectApiCreateMultipart(String json, MultipartFile file) {
-        return null;
+    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResult<?>> objectApiCreateMultipart(@RequestPart("blog") String json, @RequestParam(value = "file", required = false) MultipartFile file) throws JsonProcessingException {
+        try {
+            BlogDto blogDto = objectMapper.readValue(json, BlogDto.class);
+            if (file != null && !file.isEmpty()) {
+                String relative = imageService.saveBlogImage(file); // /upload/blog/...
+                blogDto.setImage(relative);
+            }
+            return ResponseEntity.ok(ApiResult.success(iBlogServices.objectServiceCreate(blogDto)));
+        } catch (Exception e) {
+            return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/api/v1.0.0/create[multipart]"));
+        }
     }
+
     /// /////////////////////////////////////////////////////////////////////////////////
 
     // LIST
