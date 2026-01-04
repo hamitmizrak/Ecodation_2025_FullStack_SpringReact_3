@@ -91,7 +91,8 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     @GetMapping("/list")
     public ResponseEntity<ApiResult<List<BlogDto>>> objectApiList() {
         try {
-            return ResponseEntity.ok(ApiResult.success(iBlogServices.objectServiceList()));
+            List<BlogDto> blogDtoList = iBlogServices.objectServiceList();
+            return ResponseEntity.ok(ApiResult.success(blogDtoList));
         } catch (Exception e) {
             return ResponseEntity.ok(ApiResult.error("serverError", e.getMessage(), "/blog/api/v1.0.0/list"));
         }
