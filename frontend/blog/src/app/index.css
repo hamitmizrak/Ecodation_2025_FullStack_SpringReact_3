@@ -1,0 +1,941 @@
+/*
+Project Name: SPA
+ - Author: Hamit Mizrak
+ - GitHub: https://github.com/hamitmizrak/2025_Ecodation_Frontend2
+ - Date: 2025
+ - Description: This is a single-page application (SPA) project that includes various features such as user registration, login, and more. It is built using HTML, CSS, and JavaScript.
+ - Technologies: HTML, CSS, JavaScript, Bootstrap, Font Awesome
+    - License: MIT License
+    - Version: 1.0.0
+    - Last Updated: 2025-01-01
+    - Features:
+      - User registration and login functionality
+      - Responsive design using Bootstrap
+      - Icons from Font Awesome
+      - Modal dialogs for user interactions
+      - Navigation bar with links to different sections
+      - Custom styles in style.css
+      - Utility links in useful_links.txt
+      - Git integration for version control
+    - Usage: Clone the repository and open index.html in a web browser to view the application.
+    - Installation:
+      1. Clone the repository: `git clone https://github.com/hamitmizrak/2025_Ecodation_Frontend2`
+        2. Open `index.html` in a web browser.
+    - Contributing: Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+    - Contact: For any questions or issues, please contact Hamit Mizrak at hamitmizrak@gmail.com
+ */
+
+/* ################################################################################ */
+/* ~~~~  ROOT   ~~~~ */
+:root {
+  --primary-color: #00c2cb;
+  --background-color: #1c1c1c;
+  --text-color: #fff;
+  --white-color: #fff;
+  --danger-color: #e74c3c;
+  --secondary-color: #3498db;
+  --accent-color: #8e44ad;
+  --dark-color: #000;
+  --button-radius: 8px;
+  --customise-font-family: 'Segoe UI', sans-serif;
+}
+
+/* ################################################################################ */
+/* ~~~~  COMMON PROPERTIES   ~~~~ */
+* {
+  margin: 0; /* Varsayılan dış boşlukları sıfırlar */
+  padding: 0; /* Varsayılan iç boşlukları sıfırlar */
+  box-sizing: border-box; /* width ve height hesaplamalarına padding ve border'ı dahil eder */
+  font-family: var(--customise-font-family); /* root değişkeninde tanımlı özel fontu uygular */
+}
+
+html {
+  font-size: 15px; /* Sayfanın temel font boyutunu 20px olarak ayarlar (rem için referans) */
+  scroll-padding-top: 7.5rem;
+}
+
+body {
+  background: linear-gradient(
+    to right,
+    #564f4f,
+    #1c1c1c
+  ); /* Arka planı sağa doğru gri-siyah degrade yapar */
+  color: var(--text-color); /* root değişkeninden gelen metin rengini uygular */
+  position: relative; /* Göreceli konumlandırma: içindeki mutlak konumlu öğeler için referans */
+  line-height: 1.6; /* Satırlar arasındaki yüksekliği artırarak okunabilirliği artırır */
+  overflow-x: hidden; /* Yatay kaydırmayı engeller */
+  /* Aşağıdaki satırlar yorum satırında, ihtiyaç halinde açılabilir:
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem; */
+
+  padding-top: 1.6rem; /* 3rem + 3rem (iki navbar toplamı) */
+}
+
+a {
+  text-decoration: none; /* Linklerde alt çizgiyi kaldırır */
+  color: inherit; /* Link rengini parent elemanın rengiyle aynı yapar */
+}
+
+ul {
+  list-style-type: none; /* Liste öğelerinin başındaki varsayılan noktaları kaldırır */
+}
+
+button {
+  cursor: pointer; /* Buton üzerine gelindiğinde imleci el işaretine çevirir */
+}
+
+i {
+  font-size: 1rem; /* İkon boyutunu 1rem yapar */
+
+  animation: 0.5s ease-in-out infinite alternate fadeIn; /* İlk animasyon (tekrarlı fade-in) */
+  animation: 3s ease-in-out fadeIn; /* İkinci animasyon: 3 saniyede bir fade-in (ilkini geçersiz kılar) */
+}
+
+i:hover {
+  color: #d62d2d; /* İkona hover yapıldığında rengini kırmızıya çevirir */
+}
+
+
+/* Bütün resimlerde parlayan cam efekti*/
+.img-glare {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.img-glare img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.img-glare::before {
+  content: '';
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.01) 100%);
+  transform: skewX(-20deg) scale(1.1);
+  opacity: 0;
+  pointer-events: none;
+  /* YAVAŞ VE YUMUŞAK GEÇİŞ */
+  transition: all 1.35s cubic-bezier(0.7, 0.14, 0.22, 0.95);
+  z-index: 2;
+}
+.img-glare:hover::before {
+  left: 100%;
+  opacity: 1;
+}
+
+
+
+
+/* ################################################################################ */
+/* ~~~~  LINE CLAMP   ~~~~ */
+.line-clamp4 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp6 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp8 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp10 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp15 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 15;
+  -webkit-box-orient: vertical;
+}
+
+.line-clamp25 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 25;
+  -webkit-box-orient: vertical;
+}
+
+/* ################################################################################ */
+/* ~~~~  SWEET ALERT  ~~~~ */
+/* SweetAlert2 popup'ın her zaman ortada görünmesini garanti eder */
+.swal2-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ################################################################################ */
+/* ~~~~  NAVBAR FIRST   ~~~~ */
+/* ##################################################### */
+/* NAVBAR FIRST */
+/* NAVBAR FIRST */
+#navbar_first {
+  background-color: rgba(36, 35, 35, 0.8); /* Yarı saydam koyu gri arkaplan */
+  color: var(--text-color); /* Yazı rengi, root değişkeninden alınır */
+  padding: 0.3rem 0.8rem; /* Üst/alt 0.3rem, sağ/sol 0.8rem boşluk */
+  position: fixed; /* Sayfanın en üstünde sabitlenmiş (scroll etkilmez) */
+  top: 0; /* Sayfanın en üstüne hizalanır */
+  left: 0;
+  z-index: 33000; /* navbar_second'ten daha yüksek */
+  width: 100%; /* Tüm yatay genişliği kaplar */
+  opacity: 0.95; /* Hafif saydam görünüm */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* Altında gölge efekti */
+}
+
+/* Soldaki Register/Login linkleri */
+#navbar_first .nav .nav-link {
+  color: var(--text-color); /* Link rengi root değişkeninden gelir */
+  font-size: 0.85rem; /* Küçük yazı boyutu */
+  font-weight: 400; /* Normal kalınlık */
+  text-transform: uppercase; /* Yazıları büyük harfe çevirir */
+  display: flex; /* İkon ve metni yan yana hizalamak için flex */
+  align-items: center; /* Flex ile dikey ortalama */
+  gap: 0.3rem; /* İkon ile metin arasında boşluk */
+  padding: 0.3rem 0.5rem; /* Link iç boşlukları */
+  transition: color 0.3s ease; /* Renk değişimi için yumuşak geçiş efekti */
+}
+
+/* first navbar üstüne geldiğimde */
+#navbar_first .nav .nav-link:hover {
+  color: var(--secondary-color); /* Üzerine gelince secondary renk */
+}
+
+/* Sağdaki sosyal medya ikonları (navbar_first_right) */
+#navbar_first_right .nav .nav-link {
+  font-size: 1rem; /* İkonlar biraz daha büyük */
+  padding: 0.3rem 0.4rem; /* İkon etrafında boşluk */
+}
+#navbar_first_right .nav .nav-link:hover {
+  color: var(--secondary-color); /* Üzerine gelince secondary renk */
+}
+
+/* Navbar_first ve Navbar_second için ortak ayarlar */
+#navbar_first,
+#navbar_second {
+  min-height: 3rem; /* Minimum yükseklik */
+  display: flex; /* İçeriği flexbox ile hizala */
+  align-items: center; /* Dikey ortalama */
+}
+
+/* Flag:Bayrak */
+.flag {
+  width: 1.8rem;
+}
+
+/* ################################################################################ */
+/* ##################################################### */
+/* NAVBAR SECOND */
+/* NAVBAR_SECOND alanının ana çubuğu */
+#navbar_second {
+  background-color: var(--dark-color); /* Arkaplan rengini koyu renk (root değişkeninden) yapar */
+  color: var(--text-color); /* Yazı rengini root değişkeninden alır */
+  padding: 0.5rem 1rem; /* Üst-alt 0.5rem, sağ-sol 1rem boşluk */
+  position: fixed; /* Sayfa kaydırıldığında sabit kalması için fixed */
+  top: 3rem; /* navbar_first yüksekliği kadar aşağıdan başlasın */
+  width: 100%; /* Ekranın tamamına yayılır */
+  z-index: 999; /* Üstte görünsün (header ve içeriklerin üzerinde) */
+  opacity: 0.95; /* Hafif saydam görünüm */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* Altına gölge efekti */
+  left: 0;
+  z-index: 2999;
+}
+
+/* menu scroll spy */
+#navbar_second .navbar-nav .nav-link.active {
+  background-color: var(--secondary-color); /* Örneğin mavi */
+  color: #fff !important;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(10, 98, 218, 0.15);
+  /* Dilersen transition da ekle */
+  transition: all 0.2s;
+}
+#navbar_second .navbar-nav .nav-link.active i {
+  color: #fff !important; /* Aktifken ikon da beyaz olsun */
+}
+
+#navbar_second .navbar-nav .nav-link.active {
+  background-color: var(--secondary-color) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(10, 98, 218, 0.15);
+  transition: all 0.2s;
+}
+#navbar_second .navbar-nav .nav-link.active i {
+  color: #fff !important;
+}
+
+/* Logo resmi ayarları */
+#navbar_second .navbar-brand img {
+  border-radius: 10%; /* Logonun köşelerini yuvarlat */
+  width: 4rem; /* Logonun genişliği */
+  height: 3rem; /* Logonun yüksekliği */
+  object-fit: cover; /* Görüntüyü kırpmadan kapsaması için */
+  transition: transform 0.3s ease; /* Hover efekti için yumuşak geçiş */
+}
+#navbar_second .navbar-brand img:hover {
+  transform: scale(1.05); /* Üzerine gelindiğinde logoyu %5 büyüt */
+}
+
+/* Menü linkleri ayarları */
+#navbar_second .navbar-nav .nav-link {
+  color: var(--text-color); /* Menü metin rengi */
+  font-size: 1rem; /* Menü yazı boyutu */
+  font-weight: 500; /* Yazı kalınlığı */
+  padding: 0.6rem 1rem; /* Link iç boşlukları */
+  margin: 0 0.2rem; /* Linkler arası yatay boşluk */
+  display: flex; /* İkon ve metni yan yana hizalamak için flex */
+  align-items: center; /* Dikey ortalama */
+  gap: 0.4rem; /* İkon ile metin arası boşluk */
+  letter-spacing: 0.5px; /* Harfler arası küçük boşluk */
+  border-radius: 6px; /* Link kutusunun köşelerini yuvarlat */
+  transition: all 0.3s ease; /* Hover efektleri için yumuşak geçiş */
+}
+#navbar_second .navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Hover olduğunda arkaplan hafif beyazlaşır */
+  color: var(--secondary-color); /* Hover olduğunda yazı rengi secondary olur */
+  transform: translateY(-2px); /* Hover olduğunda 2px yukarı kaydırır */
+}
+
+/* Menüdeki ikon ayarları */
+#navbar_second .navbar-nav .nav-link i {
+  font-size: 0.95rem; /* İkon boyutu */
+  color: #4da3ff; /* Varsayılan ikon rengi (mavi) */
+  transition: color 0.3s ease; /* Hover renk değişimi için geçiş */
+}
+#navbar_second .navbar-nav .nav-link:hover i {
+  color: #e3890a; /* Hover olduğunda ikon rengini turuncuya çevirir */
+}
+/* Dropdown menü (açılır liste) */
+#navbar_second .dropdown-menu {
+  background-color: #222; /* Açılır menünün arka planını koyu gri yap */
+  border: none; /* Kenarlıkları kaldır */
+}
+#navbar_second .dropdown-menu .dropdown-item {
+  color: #fff; /* Açılır menüdeki linklerin yazı rengini beyaz yap */
+}
+#navbar_second .dropdown-menu .dropdown-item:hover {
+  background-color: var(
+    --secondary-color
+  ); /* Üzerine gelindiğinde arka planı secondary renge değiştir */
+}
+
+/* Sağ taraf (arama + dark mode) hizalama */
+.nav-actions {
+  display: flex; /* İçindeki elemanları (dark mode butonu ve arama kutusu) yan yana getirir */
+  flex-direction: row; /* Flex yönünü yatay (satır) yapar */
+  align-items: center; /* Dikey eksende ortalar */
+  gap: 0.75rem; /* Elemanlar arasında 0.75rem boşluk bırakır */
+  flex-wrap: nowrap; /* Elemanların satır kırmasını engeller, tek satırda kalmasını sağlar */
+}
+
+/* Dark Mode Butonu */
+.dark-mode-btn {
+  background: linear-gradient(135deg, #3a3d98, #2d2f6d); /* Lacivert tonlarda degrade arkaplan */
+  color: #fff; /* Yazı ve ikon rengini beyaz yapar */
+  border: none; /* Kenarlıkları kaldırır */
+  border-radius: 6px; /* Köşeleri yuvarlatır */
+  padding: 0.45rem 0.7rem; /* İç boşluk (üst-alt 0.45rem, sağ-sol 0.7rem) */
+  display: flex; /* İçeriğini (ikon) flex ile hizalamak için kullanılır */
+  align-items: center; /* Dikeyte ortalama */
+  justify-content: center; /* Yatayda ortalama */
+  font-size: 1.1rem; /* Butondaki ikonun boyutunu büyütür */
+  cursor: pointer; /* Üzerine gelindiğinde fare işaretçisini el simgesine çevirir */
+  transition: all 0.3s ease; /* Renk ve büyüme değişikliklerinde yumuşak geçiş sağlar */
+}
+.dark-mode-btn:hover {
+  background: linear-gradient(
+    135deg,
+    #5053c7,
+    #373977
+  ); /* Hover olduğunda arka planın rengini değiştirir */
+  transform: scale(1.08); /* Hover olduğunda butonu %8 büyütür */
+}
+
+/* Arama kutusu kapsayıcısı */
+.search-container {
+  position: relative; /* İçindeki butonu absolute ile konumlandırmak için referans alan */
+  width: 220px; /* Varsayılan genişlik */
+  max-width: 350px; /* En fazla 350px genişler */
+  transition: width 0.4s ease; /* Genişlik değişimi olduğunda yumuşak animasyon uygular */
+}
+
+/* Focus olduğunda kapsayıcı genişlesin (responsive) */
+.search-container:focus-within {
+  width: min(
+    90vw,
+    350px
+  ); /* Input focus olduğunda container genişler:
+                                      Ekran genişliğinin %90’ına kadar, ama max 350px */
+}
+
+/* Arama kutusunun input alanı */
+.search-container input {
+  width: 100%; /* Kapsayıcı genişliğini tamamen doldurur */
+  padding-right: 80px; /* Sağ tarafta butonun üzerine yazı taşmaması için boşluk bırakır */
+  border-radius: 6px; /* Köşeleri yuvarlatır */
+}
+
+/* Arama butonunun input içinde sağa yerleşmesi */
+.search-container .search-button {
+  position: absolute; /* Butonu search-container içinde mutlak (absolute) konumlandırır */
+  top: 0; /* Kapsayıcının üst kenarına hizalar */
+  right: 0; /* Kapsayıcının sağ kenarına hizalar */
+  height: 100%; /* Input alanının yüksekliğiyle aynı olur */
+  border: none; /* Kenarlıkları kaldırır */
+  background-color: var(--secondary-color); /* Tema değişkeninden ikinci renk: butonun arkaplanı */
+  color: #fff; /* Buton metnini beyaz yapar */
+  padding: 0 15px; /* Butonun iç boşluğu (sağ-sol 15px) */
+  border-top-right-radius: 6px; /* Sağ üst köşeyi yuvarlatır (input ile bütün görünmesi için) */
+  border-bottom-right-radius: 6px; /* Sağ alt köşeyi yuvarlatır */
+  cursor: pointer; /* Üzerine gelindiğinde imleci el simgesine çevirir */
+  transition: background-color 0.3s ease; /* Arka plan rengi değişiminde yumuşak geçiş sağlar */
+}
+.search-container .search-button:hover {
+  background-color: #054282; /* Üzerine gelindiğinde arka plan rengini koyu maviye çevirir */
+}
+
+/* ################################################################################ */
+/* ~~~~  HEADER   ~~~~ */
+/* Header alanının ana kutusu */
+#header_id {
+  position: relative; /* Overlay ve içeriği konumlandırabilmek için relative */
+  background-image: url('../shared/assets/images/header1.jpg'); /* Arka plan resmi */
+  background-size: cover; /* Resmi kutunun tamamını kaplayacak şekilde ölçeklendir */
+  background-position: center; /* Resmi ortala */
+  height: 100vh; /* Görünür alanın %80 yüksekliği */
+  /* margin-top: calc(3rem + 3rem); Üstteki 2 navbarın toplam yüksekliği kadar aşağıdan başlat */
+  margin-top: 0;
+  padding-top: 2rem; /* İçeriğin üstten boşluğu */
+  color: var(--white-color); /* Yazı rengini root değişkeninden beyaz al */
+}
+
+/* Header üzerine karartma efekti (overlay) */
+#header_id .header-overlay {
+  position: absolute; /* Header alanı üzerine konumlandırmak için absolute */
+  top: 0;
+  left: 0; /* Sol üstten başlat */
+  width: 100%;
+  height: 100%; /* Tüm alanı kapla */
+  background: rgba(0, 0, 0, 0.1); /* Hafif siyah yarı saydam arkaplan */
+  z-index: 0; /* İçeriğin arkasında kalsın */
+}
+
+/* Header içeriği tam yüksekliği kapsasın */
+#header_id .container,
+#header_id .row {
+  height: 100%; /* Tüm header yüksekliğini doldurur */
+}
+
+/* İçeriği ortalamak için flex kullanımı */
+#header_id .row {
+  display: flex;
+  justify-content: center; /* Yatay ortalama */
+  align-items: center; /* Dikey ortalama */
+}
+
+/* Başlık ve alt başlık */
+#header_id h1,
+#header_id h4 {
+  position: relative; /* Overlay’in üstünde görünmesi için */
+  z-index: 1; /* Overlay’in üst katmanına al */
+  text-shadow: 0 2px 6px rgba(6, 80, 218, 0.6); /* Yazıya mavi tonlu gölge efekti */
+}
+
+/* Sosyal bağlantıların kutusu */
+.header-links {
+  position: relative; /* Overlay’in üstünde durması için */
+  z-index: 1; /* Karartmanın üst katmanında */
+  margin-top: 2rem; /* Başlık ile bağlantılar arasında boşluk */
+  display: flex; /* Bağlantıları yatayda hizalamak için flex */
+  justify-content: center; /* Ortaya hizala */
+  flex-wrap: wrap; /* Küçük ekranlarda alt satıra geçmesine izin ver */
+  gap: 1rem; /* Link kutuları arası boşluk */
+}
+
+/* Tek tek bağlantı kutuları */
+.header-links .header-link {
+  display: inline-flex; /* İkon ve yazıyı yan yana hizalamak için */
+  align-items: center; /* Dikeyte ortala */
+  gap: 0.5rem; /* İkon ile yazı arası boşluk */
+  padding: 0.5rem 1rem; /* Kutunun iç boşlukları */
+  color: #fff; /* Yazı rengi beyaz */
+  background: rgba(0, 0, 0, 0.3); /* Yarı saydam arkaplan */
+  border-radius: 8px; /* Yuvarlatılmış köşeler */
+  font-size: 1rem; /* Yazı boyutu */
+  transition: all 0.3s ease; /* Hover efektlerinde yumuşak geçiş */
+  text-decoration: none; /* Alt çizgiyi kaldır */
+}
+
+/* Bağlantı içindeki ikonlar */
+.header-links .header-link i {
+  font-size: 1.2rem; /* İkon boyutu */
+  transition: transform 0.3s ease; /* Hover olduğunda büyütme geçişi */
+}
+
+/* Hover efekti */
+.header-links .header-link:hover {
+  background: rgba(255, 255, 255, 0.15); /* Hover olunca arka planı biraz aç */
+  transform: translateY(-3px); /* Hover olunca yukarıya hafif kaldır */
+}
+
+/* ################################################################################ */
+/* ~~~~  SOCIAL MEDYA RIGHT   ~~~~ */
+.social-bar-fixed {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 0.3rem 0.2rem;
+}
+
+.social-bar-fixed .social-link {
+  background: #181a23;
+  color: #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin: 0.1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.25s cubic-bezier(0.4, 2.3, 0.3, 1),
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.18s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.social-bar-fixed .social-link.linkedin:hover,
+.social-bar-fixed .social-link:focus:nth-child(1) {
+  background: #0077b5;
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 6px 30px #0077b566;
+  border-color: #0077b5;
+}
+
+.social-bar-fixed .social-link.github:hover,
+.social-bar-fixed .social-link:focus:nth-child(2) {
+  background: #181717;
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 6px 30px #18171766;
+  border-color: #fff;
+}
+
+.social-bar-fixed .social-link.instagram:hover,
+.social-bar-fixed .social-link:focus:nth-child(3) {
+  background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 6px 30px #ee2a7b44;
+  border-color: #ee2a7b;
+}
+
+.social-bar-fixed .social-link.mail:hover,
+.social-bar-fixed .social-link:focus:nth-child(4) {
+  background: #e17055;
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 6px 30px #e1705566;
+  border-color: #e17055;
+}
+
+/* Sadece hoverlanan ikon büyüsün, diğerleri küçülsün */
+.social-bar-fixed .social-link:hover {
+  z-index: 2;
+}
+.social-bar-fixed .social-link:not(:hover) {
+  transform: scale(0.92);
+  filter: blur(0.2px);
+  opacity: 0.85;
+  transition:
+    transform 0.24s,
+    opacity 0.16s,
+    filter 0.14s;
+}
+
+.social-bar-fixed .social-link.linkedin {
+  background: #0077b5;
+  color: #fff;
+  border-color: #0077b5;
+}
+.social-bar-fixed .social-link.github {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+.social-bar-fixed .social-link.instagram {
+  background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+  color: #fff;
+  border-color: #ee2a7b;
+}
+.social-bar-fixed .social-link.mail {
+  background: #ea4335;
+  color: #fff;
+  border-color: #ea4335;
+}
+
+/* Hover renkleri (daha parlak, biraz büyüt, gölgeyle) */
+.social-bar-fixed .social-link.linkedin:hover,
+.social-bar-fixed .social-link:focus.linkedin {
+  background: #005983;
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 8px 30px #0077b588;
+}
+.social-bar-fixed .social-link.github:hover,
+.social-bar-fixed .social-link:focus.github {
+  background: #444;
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 8px 30px #444a;
+}
+.social-bar-fixed .social-link.instagram:hover,
+.social-bar-fixed .social-link:focus.instagram {
+  background: linear-gradient(135deg, #fd5949 10%, #d6249f 60%, #285aeb 100%);
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 8px 30px #ee2a7b55;
+}
+.social-bar-fixed .social-link.mail:hover,
+.social-bar-fixed .social-link:focus.mail {
+  background: #e17055;
+  color: #fff;
+  transform: scale(1.3) rotate(-8deg);
+  box-shadow: 0 8px 30px #e1705577;
+}
+
+/* Diğerlerini küçült */
+.social-bar-fixed .social-link:hover {
+  z-index: 2;
+}
+.social-bar-fixed .social-link:not(:hover) {
+  transform: scale(0.92);
+  filter: blur(0.2px);
+  opacity: 0.85;
+  transition:
+    transform 0.24s,
+    opacity 0.16s,
+    filter 0.14s;
+}
+
+/* ################################################################################ */
+/* ~~~~  MAIN   ~~~~ */
+
+/* Cam Parlaması Efekti */
+/* Kart/Resim cam parlaması (sun glare) efekti */
+
+
+/* ~~~~  Works   ~~~~ */
+/* Works : Çalışmalar */
+.customize_heading {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 40px 0 2rem 0;
+  text-transform: uppercase;
+  color: #5c8cda;
+  position: relative; /* Alt çizgi için gerekli */
+}
+
+/* ~~~~  Başlık Alt çizgi   ~~~~ */
+/* Başlık Alt çizgi */
+.customize_heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* Başlık ile çizgi arasındaki mesafe */
+  left: 50%; /* Ortalamak için */
+  transform: translateX(-50%);
+  width: 80px; /* Çizgi uzunluğu */
+  height: 4px; /* Çizgi kalınlığı */
+  background-color: #eef43a; /* Çizgi rengi */
+  border-radius: 2px;
+}
+
+#scroll_spy_works {
+  min-height: 1rem !important;
+}
+
+/* ~~~~  success rate   ~~~~ */
+/* success rate: Başarı oranları */
+#success_rate {
+  margin-top: 10rem;
+  background-color: #fff;
+  background-color: #054282;
+  color: #3498db;
+  min-height: 20rem;
+}
+
+#success_rate div {
+  margin-top: 5rem;
+}
+
+/* ~~~~  newspaper  ~~~~ */
+/* newspaper */
+#scroll_spy_newspaper {
+  min-height: 45rem !important ;
+}
+
+/* ~~~~  About  ~~~~ */
+/* ### About HAKKIMIZDA ###*/
+/* ABOUT SECTION */
+/* ### About HAKKIMIZDA ### */
+#scroll_spy_about {
+  position: relative;
+  background-image: url('../shared/assets/images/about.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll; /* mobil performans için fixed yerine scroll */
+  min-height: 40rem;
+  color: #fff;
+  background-color: #054282;
+  padding: 4rem 0;
+}
+
+#scroll_spy_about .about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65); /* daha koyu */
+  z-index: 0;
+}
+
+#scroll_spy_about .container {
+  position: relative;
+  z-index: 1;
+}
+
+#about_picture {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease;
+  height: 37rem;
+}
+
+#scroll_spy_about .about-text {
+  background: rgba(255, 255, 255, 0.08); /* daha şeffaf beyaz */
+  border-radius: 12px;
+  padding: 2rem;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #f0f0f0;
+  backdrop-filter: blur(5px); /* modern tarayıcılar için cam efekti */
+}
+
+#scroll_spy_about .about-text p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+  #about {
+    padding: 4rem 1rem;
+  }
+  #about .about-text {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* ### BLOG ###*/
+#blog {
+  position: relative;
+  background: linear-gradient(180deg, #585656, #2e2929);
+}
+
+#blog::before {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  left: 0px;
+  content: '';
+  background-image: url('../shared/assets/images/blog.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.92;
+  background: linear-gradient(180deg, #585656, #2e2929);
+}
+
+#blog img {
+  height: 250px;
+}
+
+#blog .container .row .col-md-3 .card .card-body h4 {
+  color: black;
+  text-align: center;
+}
+
+#blog .col-md-3 {
+  margin-bottom: 1rem;
+}
+
+.blog_date {
+  opacity: 0.6;
+  float: right;
+  margin-top: 0.8rem;
+}
+
+/* ### MAPS###*/
+#maps iframe {
+  width: 100%;
+  height: 40rem !important;
+}
+
+/* ################################################################################ */
+/* ~~~~  FOOTER   ~~~~ */
+footer {
+  background-color: #181a23;
+  color: #fff;
+}
+
+#footer_id h5 {
+  color: #ffc107;
+  margin-bottom: 1rem;
+}
+
+#footer_id a {
+  color: #ccc;
+  text-decoration: none;
+}
+#footer_id a:hover {
+  color: #fff;
+}
+.footer-link li {
+  margin-bottom: 0.5rem;
+}
+.social-icons a {
+  margin-right: 10px;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+}
+.social-icons a:hover {
+  color: #ffc107;
+}
+.subscribe-form .form-control {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.subscribe-form .btn {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+#footer-logo {
+  max-width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-company-text {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.subscribe-form input[type='email']::placeholder {
+  color: rgb(199, 225, 30);
+}
+
+/* Alt Kısım */
+.footer-bottom {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #333;
+  font-size: 18px;
+  background-color: #181a23;
+}
+
+/* ################################################################################ */
+/* ~~~~   BACK TO TOP  ~~~~ */
+#back_top_id i {
+  position: fixed;
+  right: 0.8rem;
+  bottom: 1rem;
+  width: 2.5rem !important;
+  height: 2.5rem;
+  color: #44ff00;
+  background-color: #000;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  padding-top: 0.3rem;
+  box-shadow: 0 2px 16px rgba(68, 255, 0, 0.22);
+  opacity: 0;
+  transform: scale(0.5);
+  /* Animasyon başta görünmez, sonradan büyür ve görünür */
+  animation: backtop-appear 1.1s cubic-bezier(.28,1.5,.52,0.92) 0.8s forwards;
+  z-index: 9999;
+  transition:
+    box-shadow 0.4s,
+    background 0.3s,
+    color 0.3s,
+    transform 0.25s;
+}
+@keyframes backtop-appear {
+  from { opacity: 0; transform: scale(0.5);}
+  60% { opacity: 0.82; transform: scale(1.13);}
+  80% { opacity: 1; transform: scale(0.95);}
+  to   { opacity: 1; transform: scale(1);}
+}
+
+
+#back_top_id i:hover {
+  color: #fff;
+  background: linear-gradient(120deg, #44ff00 60%, #054282 100%);
+  box-shadow:
+    0 0 16px #44ff00cc,
+    0 0 36px #54ff22bb,
+    0 0 60px #00ffb7a9;
+  filter: brightness(1.5) drop-shadow(0 0 7px #54ff22bb);
+  transform: scale(1.2) rotate(-8deg);
+  transition:
+    box-shadow 0.3s,
+    background 0.3s,
+    color 0.2s,
+    filter 0.24s,
+    transform 0.32s cubic-bezier(.6,1.6,.22,.86);
+}
+
+/* ################################################################################ */
+/* ~~~~     ~~~~ */
+
+/* ################################################################################ */
+/* ~~~~  RESPONSIVE DESIGN   ~~~~ */
+/* Küçük ekranlarda da yan yana (flex yapısı korunsun) */

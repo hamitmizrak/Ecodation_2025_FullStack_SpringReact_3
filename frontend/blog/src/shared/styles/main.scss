@@ -1,0 +1,10 @@
+// Bootstrap değişken override örnekleri (opsiyonel)
+$primary: #3498db;
+$enable-rounded: true;
+
+@import "bootstrap/scss/bootstrap"; // bootstrap’ı scss’tan al
+@import "bootstrap-icons/font/bootstrap-icons"; // bootstrap ikonları
+@import "../assets/styles/custom"; // özel stiller
+@import "../assets/styles/responsive"; // responsive stiller
+@import "../assets/styles/animations"; // animasyon stilleri
+@import "../assets/styles/glassmorphism"; // glassmorphism stilleri

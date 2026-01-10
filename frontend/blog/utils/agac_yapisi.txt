@@ -1,0 +1,74 @@
+src/
+├─ app/                         # uygulama seviyesi (tek kaynak)
+│  ├─ App.jsx
+│  ├─ index.css
+│  ├─ router.jsx                # tüm route’lar
+│  └─ store.js                  # Redux store
+│
+├─ config/                      # ortam & sabitler
+│  └─ api.js                    # API_BASE, IMAGE_BASE, ENDPOINTS
+│
+├─ lib/                         # 3rd-party adaptörleri (tek yerde)
+│  ├─ axiosClient.js            # axios instance + set/clearAccessToken
+│  └─ i18n/                     # (kullanıyorsan) çok dillilik
+│     ├─ index.js
+│     └─ locales/
+│        ├─ tr.json
+│        └─ en.json
+│
+├─ shared/                      # feature’lardan bağımsız paylaşım havuzu
+│  ├─ assets/
+│  │  ├─ images/
+│  │  │  ├─ flag/
+│  │  │  └─ avatars/
+│  │  └─ icons/
+│  ├─ components/               # küçük/orta UI parçaları (Button, Modal…)
+│  ├─ hooks/                    # useDebounce, useAuthGuard…
+│  ├─ layouts/                  # PublicLayout vs.
+│  ├─ styles/                   # global.scss, variables.scss…
+│  └─ utils/                    # helpers, validators, formatters
+│
+├─ areas/                       # bölüm/alan bazlı layoutlar & sayfalar
+│  ├─ admin/
+│  │  ├─ AdminLayout.jsx
+│  │  └─ AdminHome.jsx
+│  └─ writer/
+│     ├─ WriterLayout.jsx
+│     └─ WriterHome.jsx
+│
+├─ features/                    # ÖZELLİK/ALAN bazlı modüller (her şey bir arada)
+│  ├─ auth/
+│  │  ├─ authSlice.js
+│  │  ├─ api.js                 # (ops.) sadece auth istekleri
+│  │  └─ components/
+│  │     ├─ LoginForm.jsx
+│  │     └─ RegisterForm.jsx
+│  │
+│  ├─ blogCategory/             # ADMIN
+│  │  ├─ api.js                 # CRUD istekleri
+│  │  ├─ slice.js               # (ops.) RTK slice
+│  │  └─ pages/
+│  │     └─ BlogCategoryPage.jsx
+│  │
+│  ├─ blog/                     # WRITER
+│  │  ├─ api.js
+│  │  ├─ slice.js
+│  │  └─ pages/
+│  │     └─ BlogEditorPage.jsx
+│  │
+│  └─ profile/
+│     ├─ api.js
+│     └─ pages/
+│        └─ ProfilePage.jsx
+│
+├─ pages/                       # public sayfalar
+│  ├─ HomePage.jsx
+│  ├─ AboutPage.jsx
+│  └─ NotFound.jsx
+│
+├─ routes/                      # korumalı yönlendirme yardımcıları
+│  ├─ ProtectedRoute.jsx
+│  └─ AdminRoute.jsx
+│
+├─ index.js                     # ReactDOM + <Provider store>
+└─ setupTests.js
