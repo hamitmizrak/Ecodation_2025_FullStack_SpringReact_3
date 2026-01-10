@@ -88,31 +88,12 @@ Font Family: Fira Code
 
 ## REACTJS INSTALL
 
-``sh
-npx create-react-app blog
-cd blog
-npm start
+```sh
+npm i nodemon --save-dev
+veya
+npm i nodemon -D
 
-// edit
-npm install lucide-react
-
-// icon
-npm install react-icons
-
-toast ekle
-npm i react-hot-toast
-
-pdf excel eklemek
-npm i xlsx jspdf jspdf-autotable
-
-npm i axios react-router-dom zustand jwt-decode
-
-npm install axios --save
-npm install react-router-dom --save
-npm install i18next --save
-npm install react-i18next --save
-
-````
+```
 
 ## Npm Komutları
 ```sh
