@@ -75,7 +75,6 @@ Spring Boot And React JS
 ## 2- Google React Redux Developer : https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
 
 ## Fira Code
-
 1- Google Font: https://fonts.google.com/specimen/Fira+Code?subset=greek&preview.text=%C4%9F%C3%BC%C5%9F%C3%A7i&preview.text_type=custom
 
 2- Settings
