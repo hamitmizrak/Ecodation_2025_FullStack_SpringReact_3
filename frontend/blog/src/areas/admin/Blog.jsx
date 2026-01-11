@@ -149,6 +149,66 @@ function Blog() {
     }
   };
 
+  // ---------- Derived (filter/sort/page) ----------
+  // FILTERED (USE MEMO)
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return items;
+    return items.filter((x) => {
+      const id = (x.blogId ?? x.id ?? '').toString();
+      const header = (x.header ?? '').toLowerCase();
+      const title = (x.title ?? '').toLowerCase();
+      const catName = (x.blogCategoryDto?.categoryName ?? '').toLowerCase();
+      return id.includes(q) || header.includes(q) || title.includes(q) || catName.includes(q);
+    });
+  }, [items, query]);
+
+  // SORTED (USE MEMO)
+  const sorted = useMemo(() => {
+    // Yeni bir dizi oluştur(filtrelenmiş veriden)
+    const arr = [...filtered];
+
+    // Sıralama
+    arr.sort((a, b) => {
+      const va =
+        sortKey === 'header'
+          ? (a.header ?? '').toLowerCase()
+          : sortKey === 'title'
+          ? (a.title ?? '').toLowerCase()
+          : sortKey === 'categoryName'
+          ? (a.blogCategoryDto?.categoryName ?? '').toLowerCase()
+          : sortKey === 'systemCreatedDate'
+          ? new Date(a.systemCreatedDate || 0).getTime()
+          : a.blogId ?? a.id ?? 0;
+      const vb =
+        sortKey === 'header'
+          ? (b.header ?? '').toLowerCase()
+          : sortKey === 'title'
+          ? (b.title ?? '').toLowerCase()
+          : sortKey === 'categoryName'
+          ? (b.blogCategoryDto?.categoryName ?? '').toLowerCase()
+          : sortKey === 'systemCreatedDate'
+          ? new Date(b.systemCreatedDate || 0).getTime()
+          : b.blogId ?? b.id ?? 0;
+      const r = va < vb ? -1 : va > vb ? 1 : 0;
+      return sortDir === 'asc' ? r : -r;
+    });
+    return arr;
+  }, [filtered, sortKey, sortDir]);
+
+  // PAGINATION CALCULATIONS
+  const total = sorted.length;
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(page, pageCount);
+  const paged = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return sorted.slice(start, start + pageSize);
+  }, [sorted, currentPage, pageSize]);
+
+
+  // ONCHANGE HELPERS
+
+
   /////////////////////////////////////////////////////////////////////////////////
   // RETURN
   return <div>Blog</div>;
