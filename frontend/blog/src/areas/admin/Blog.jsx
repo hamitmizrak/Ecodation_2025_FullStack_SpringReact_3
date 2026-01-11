@@ -205,9 +205,146 @@ function Blog() {
     return sorted.slice(start, start + pageSize);
   }, [sorted, currentPage, pageSize]);
 
-
+  // ---------- onChange ----------
   // ONCHANGE HELPERS
+  const resetForm = () => {
+    setForm({
+      header: '',
+      title: '',
+      content: '',
+      categoryId: '',
+      image: '',
+    });
+    setFormErrors({});
+    setFile(null);
+    // Resim URL boşalt
+    if (setFilePreview) {
+      URL.revokeObjectURL(filePreview);
+      setFilePreview('');
+    }
+  };
 
+  // FORM DATA ALMAK
+  const onChange = (e) => {
+    // Object destructuring
+    const { name, value } = e.target;
+
+    setForm((prev) => ({ ...prev, [name]: value }));
+    //setFormErrors((prev) => ({ ...prev, [name]: '' })); // Hata temizle
+    setFormErrors((prev) => ({ ...prev, [name]: undefined })); // Hata temizle
+  };
+
+  // CLEAR FILE
+  const clearFile = () => {
+    setFile(null);
+    if (filePreview) {
+      URL.revokeObjectURL(filePreview);
+    }
+    setFilePreview('');
+    const input = document.getElementById('blog-image-file');
+    if (input) input.value = '';
+  };
+
+  // FILE CHANGE
+  const onFileChange = (e) => {
+    const file = e.target.files?.[0];
+    //const file = e.target.files?.[0] || null;
+    if (!file) return clearFile();
+    setFile(file);
+
+    if (filePreview) {
+      URL.revokeObjectURL(filePreview);
+    }
+    setFilePreview(URL.createObjectURL(file));
+  };
+
+  // CLOSE ALL MODALS
+  const closeAll = () => {
+    setShowCreate(false);
+    setShowEdit(false);
+    setShowView(false);
+    setShowDelete(false);
+  };
+
+  // OPEN CREATE MODAL
+  const openCreate = () => {
+    closeAll();
+    resetForm();
+    setShowCreate(true);
+  };
+
+  // CLOSE CREATE MODAL
+  const closeCreate = () => {
+    setShowCreate(false);
+    resetForm();
+  };
+
+  // OPEN EDIT MODAL
+  const openEdit = (row) => {
+    closeAll();
+    setSelected(row);
+    resetForm();
+    setForm({
+      header: row.header || '',
+      title: row.title || '',
+      content: row.content || '',
+      image: row.image || '',
+      categoryId: row.blogCategoryDto?.categoryId ?? row.blogCategoryDto?.id ?? '',
+    });
+    setShowEdit(true);
+  };
+
+  // CLOSE EDIT MODAL
+  const closeEdit = () => {
+    setShowEdit(false);
+    setSelected(null);
+    resetForm();
+  };
+
+  // OPEN VIEW MODAL
+  const openView = (row) => {
+    closeAll();
+    setSelected(row);
+    setShowView(true);
+  };
+  // CLOSE VIEW MODAL
+  const closeView = () => {
+    setShowView(false);
+    setSelected(null);
+  };
+
+  // OPEN DELETE MODAL
+  const openDelete = (row) => {
+    closeAll();
+    setSelected(row);
+    setShowDelete(true);
+  };
+
+  // CLOSE DELETE MODAL
+  const closeDelete = () => {
+    setShowDelete(false);
+    setSelected(null);
+  };
+
+  // ----------- Validate Form -----------
+  const validateForm = () => {
+    // HATALARI SIFIRLA
+    const errors = {};
+
+    if (!form.header?.trim()) errors.header = 'Başlık zorunludur.';
+
+    if (!form.title || form.title.trim() === '') {
+      errors.title = 'Title zorunludur.';
+    }
+    if (!form.content || form.content.trim() === '') {
+      errors.content = 'İçerik zorunludur.';
+    }
+    if (!form.categoryId || form.categoryId.toString().trim() === '') {
+      errors.categoryId = 'Kategori zorunludur.';
+    }
+    setFormErrors(errors);
+    return errors;
+  };
 
   /////////////////////////////////////////////////////////////////////////////////
   // RETURN
