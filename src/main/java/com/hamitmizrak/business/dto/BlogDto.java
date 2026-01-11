@@ -46,6 +46,7 @@ public class BlogDto extends AuditingAwareBaseDto implements Serializable {
     @Builder.Default
     private String image="resim.png";
 
+    // DATE
     private Date systemCreatedDate;
 
     /// ///////////////////////////////////////////////////////////////////////////////////
