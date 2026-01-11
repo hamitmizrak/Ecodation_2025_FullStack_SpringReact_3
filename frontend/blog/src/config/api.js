@@ -42,12 +42,22 @@ export const ENDPOINTS = {
     LIST: '/roles/api/v1.0.0', // Sadece örnek, kendi path’iniz farklı olabilir
   },
 
+  // BLOG KATEGORI
   BLOG_CATEGORY: {
     LIST: '/blog/category/api/v1.0.0/list',
     FIND: (id) => `/blog/category/api/v1.0.0/find/${id}`,
     CREATE: '/blog/category/api/v1.0.0/create',
     UPDATE: (id) => `/blog/category/api/v1.0.0/update/${id}`,
     DELETE: (id) => `/blog/category/api/v1.0.0/delete/${id}`,
+  },
+
+  // BLOGLAR
+  BLOGS: {
+    LIST: '/blog/api/v1.0.0/list',
+    FIND: (id) => `/blog/api/v1.0.0/find/${id}`,
+    CREATE: '/blog/api/v1.0.0/create',
+    UPDATE: (id) => `/blog/api/v1.0.0/update/${id}`,
+    DELETE: (id) => `/blog/api/v1.0.0/delete/${id}`,
   },
 }; // ENDPOINTS sonu
 
