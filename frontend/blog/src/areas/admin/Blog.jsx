@@ -56,6 +56,8 @@ function Blog() {
 
   // SELECTION + FORM
   const [selected, setSelected] = useState(null);
+
+  // FORM DATA
   const [form, setForm] = useState({
     header: '',
     title: '',
@@ -200,6 +202,8 @@ function Blog() {
   const total = sorted.length;
   const pageCount = Math.max(1, Math.ceil(total / pageSize));
   const currentPage = Math.min(page, pageCount);
+
+  // PAGED (USE MEMO)
   const paged = useMemo(() => {
     const start = (currentPage - 1) * pageSize;
     return sorted.slice(start, start + pageSize);
@@ -348,7 +352,8 @@ function Blog() {
 
   /////////////////////////////////////////////////////////////////////////////////
   // RETURN
-  return <div>Blog</div>;
+  return <>Blog</>;
 }
 
+// I18N (InternationalizatioN) Desteği
 export default withTranslation()(Blog);
