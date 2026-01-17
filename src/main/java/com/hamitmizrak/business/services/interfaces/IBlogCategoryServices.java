@@ -5,10 +5,12 @@ import com.hamitmizrak.business.services.IModelMapperService;
 
 // D: Dto
 // E: Entity
-public interface IBlogCategoryServices<D,E> extends IModelMapperService<D,E>, ICrudService<D,E> {
+public interface IBlogCategoryServices<D, E> extends IModelMapperService<D,E>, ICrudService<D,E> {
 
     // SPEED DATA Category
-    public String blogCategorySpeedData(Integer data);
+    public String categorySpeedData(Integer data);
 
-    public String blogCategoryDeleteAll();
-}
+    // DELETE ALL Category
+    public String categoryDeleteAll();
+
+} //end interface

@@ -7,12 +7,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class BlogCategoryMapper {
 
-
-    // Entity ==> DTO
     public BlogCategoryDto toDto(BlogCategoryEntity e) {
-        // Entity boşsa
         if (e == null) return null;
-
         return BlogCategoryDto.builder()
                 .categoryId(e.getCategoryId())
                 .categoryName(e.getCategoryName())
@@ -20,17 +16,11 @@ public class BlogCategoryMapper {
                 .build();
     }
 
-
-    // DTO ==> Entity
-    public BlogCategoryEntity toEntiy(BlogCategoryDto d) {
-        // Dto boşsa
+    public BlogCategoryEntity toEntity(BlogCategoryDto d) {
         if (d == null) return null;
-
         return BlogCategoryEntity.builder()
                 .categoryId(d.getCategoryId())
                 .categoryName(d.getCategoryName())
-                .systemCreatedDate(d.getSystemCreatedDate())
                 .build();
     }
-
-} //end BlogCategoryMapper
+}

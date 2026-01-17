@@ -1,26 +1,27 @@
 package com.hamitmizrak.business.services.impl;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.bean.PasswordEncoderBean;
 import com.hamitmizrak.business.dto.RegisterDto;
 import com.hamitmizrak.business.services.interfaces.IRegisterServices;
-import com.hamitmizrak.business.services.interfaces.ITokenEmail;
-import com.hamitmizrak.data.entity.EmailEntity;
-import com.hamitmizrak.data.entity.ForRegisterTokenEmailConfirmationEntity;
+import com.hamitmizrak.token_mail.entity.EmailEntity;
 import com.hamitmizrak.data.entity.RegisterEntity;
 import com.hamitmizrak.data.entity.RoleEntity;
-import com.hamitmizrak.data.repository.IEmailRepository;
-import com.hamitmizrak.data.repository.IForRegisterTokenEmailConfirmationEntity;
+import com.hamitmizrak.token_mail.repository.IEmailRepository;
 import com.hamitmizrak.data.repository.IRegisterRepository;
 import com.hamitmizrak.data.repository.IRoleRepository;
 import com.hamitmizrak.exception.HamitMizrakException;
 import com.hamitmizrak.exception._404_NotFoundException;
+import com.hamitmizrak.token_mail.entity.ForRegisterTokenEmailConfirmationEntity;
+import com.hamitmizrak.token_mail.repository.IForRegisterTokenEmailConfirmationEntity;
+import com.hamitmizrak.token_mail.interfaces.ITokenEmail;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

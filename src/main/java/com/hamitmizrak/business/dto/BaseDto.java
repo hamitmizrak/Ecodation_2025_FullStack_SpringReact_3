@@ -4,6 +4,7 @@ import com.hamitmizrak.audit.AuditingAwareBaseDto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 // LOMBOK

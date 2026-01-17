@@ -3,12 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <!--Spring boot Version (parent)-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.7</version>  <!-- Spring Boot Version: 4.0.1 -->
+        <version>3.3.7</version>  <!-- Spring Boot Version: 3.3.7   3.4.9    3.5.5 -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -19,7 +18,6 @@
     <name>Ecodation_2025_FullStack_SpringReact_3</name>
     <description>Ecodation_2025_FullStack_SpringReact_3</description>
     <url>https://github.com/HamitMizrak</url>
-
 
     <!-- Proje Lisansı -->
     <licenses>
@@ -36,7 +34,7 @@
             <id>hamitmizrak</id>
             <name>Hamit Mızrak</name>
             <email>hamitmizrak@gmail.com</email>
-            <url>https://github.com/hamitmizrak/Ecodation_2025_FullStack_SpringReact_3.gi</url>
+            <url>https://github.com/HamitMizrak</url>
             <roles>
                 <role>lead developer</role>
                 <role>architect</role>
@@ -55,12 +53,11 @@
 
     <!--
     war: java EE için kullanalım. JSP,servlet,html,css3
-    jar: Distrubution(Dağıtım),Spring Boot için kullanalım
+    jar: Spring Boot için kullanalım
     -->
     <!--apache tomcat manuel için war ekliyorum-->
     <!--<packaging>war</packaging>-->
     <packaging>jar</packaging>
-
 
     <!--properties-->
     <properties>
@@ -85,7 +82,6 @@
         <spring.security.version>3.3.4</spring.security.version>
     </properties>
 
-
     <!-- start dependencies-->
     <dependencies>
 
@@ -96,7 +92,7 @@
         </dependency>-->
 
         <!-- #### REDIS #################################################  -->
-      <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
@@ -125,7 +121,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- #### ÖNEMLİ KÜTÜPHANLER #################################################  -->
         <!-- E MAİL-->
@@ -390,17 +386,17 @@
 
     <!--build-->
     <build>
+
         <!--apache tomcat manuel deployment için-->
         <defaultGoal>spring-boot:run</defaultGoal>
         <finalName>${project.artifactId}</finalName>
 
         <plugins>
-            <!-- for maven target 17: Jenkins or SonarQube 11 veya 17 yapmalısınız -->
+            <!-- for maven target 17: SonarQube 11 veya 17 yapmalısınız -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <!--<version>3.5.1</version>-->
-
                 <configuration>
                     <!--for jdk and for redis-->
                     <source>17</source>
@@ -415,6 +411,9 @@
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-configuration-processor</artifactId>
                         </path>
+
+                        <!--for lombok-->
+                        <!-- important !: for lombok you have to `${lombok.version}` give -->
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <!--Yeni nesil Spring boot 3.5.0 lombok hatasını önlemek-->

@@ -12,7 +12,7 @@
 // .env dosyanızda VITE_API_BASE veya REACT_APP_API_BASE varsa onu kullanır.
 export const API_BASE =
   import.meta?.env?.VITE_API_BASE || // Vite ortamı için (örn. VITE_API_BASE)
-  process.env.REACT_APP_BACKEND_URL || // CRA ortamı için (örn. REACT_APP_API_BASE)
+  process.env.REACT_APP_API_BASE || // CRA ortamı için (örn. REACT_APP_API_BASE)
   'http://localhost:4444'; // Lokal fallback
 
 // Resimlerin geldiği kök URL
@@ -42,26 +42,36 @@ export const ENDPOINTS = {
     LIST: '/roles/api/v1.0.0', // Sadece örnek, kendi path’iniz farklı olabilir
   },
 
-  // BLOG KATEGORI
+
+  // Blog Kategori endpoint’leri (CRUD)
   BLOG_CATEGORY: {
-    LIST: '/blog/category/api/v1.0.0/list',
-    FIND: (id) => `/blog/category/api/v1.0.0/find/${id}`,
-    CREATE: '/blog/category/api/v1.0.0/create',
-    UPDATE: (id) => `/blog/category/api/v1.0.0/update/${id}`,
-    DELETE: (id) => `/blog/category/api/v1.0.0/delete/${id}`,
+    LIST: '/blog/category/api/v1.0.0/list', // Kategori listesi (GET)
+    CREATE: '/blog/category/api/v1.0.0/create', // Kategori ekle (POST)
+    FIND: (id) => `/blog/category/api/v1.0.0/find/${id}`, // Kategori Bul (GET)
+    UPDATE: (id) => `/blog/category/api/v1.0.0/update/${id}`, // Kategori güncelle (PUT)
+    DELETE: (id) => `/blog/category/api/v1.0.0/delete/${id}`, // Kategori sil (DELETE)
   },
 
-  // BLOGLAR
-  BLOGS: {
-    LIST: '/blog/api/v1.0.0/list',
-    FIND: (id) => `/blog/api/v1.0.0/find/${id}`,
-    CREATE: '/blog/api/v1.0.0/create',
-    UPDATE: (id) => `/blog/api/v1.0.0/update/${id}`,
+  // Blog — Backend sözleşmesi (JSON *veya* multipart) ile uyumlu:
+  //  POST /blog/api/v1.0.0/create
+  //  PUT  /blog/api/v1.0.0/update/{id}
+  BLOG: {
+    LIST:   '/blog/api/v1.0.0/list',
+    CREATE: '/blog/api/v1.0.0/create',               // <<< düz string (path’te categoryId yok)
+    FIND:   (id) => `/blog/api/v1.0.0/find/${id}`,
+    UPDATE: (id) => `/blog/api/v1.0.0/update/${id}`,  // <<< düz id (path’te categoryId yok)
     DELETE: (id) => `/blog/api/v1.0.0/delete/${id}`,
   },
-}; // ENDPOINTS sonu
 
-// FRONTEND TARAFINDAN KULLANIM ÖRNEKLERİ:
+  ABOUT: {
+    LIST: '/about/api/v1.0.0/list',
+    CREATE: '/about/api/v1.0.0/create',
+    UPDATE: (id) => `/about/api/v1.0.0/update/${id}`,
+    DELETE: (id) => `/about/api/v1.0.0/delete/${id}`,
+  },
+};
+
+// KULLANIM ÖRNEKLERİ:
 // axios.post(`${API_BASE}${ENDPOINTS.LOGIN}`, { email, password });
 // axios.get(`${API_BASE}${ENDPOINTS.BLOG_CATEGORY.LIST}`);
 // axios.put(`${API_BASE}${ENDPOINTS.BLOG_CATEGORY.UPDATE(5)}`, data);

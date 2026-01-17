@@ -1,12 +1,16 @@
 package com.hamitmizrak.business.dto;
 
-//import com.hamitmizrak.annotation.AnnotationUniqueEmailAddress;
+import com.hamitmizrak.annotation.AnnotationUniqueEmailAddress;
 import com.hamitmizrak.audit.AuditingAwareBaseDto;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.Serializable;
@@ -14,9 +18,7 @@ import java.util.Collection;
 import java.util.Date;
 
 // LOMBOK
-//@Data  // Getter + Setter + Equals + HashCode + toString
-@Getter
-@Setter
+@Data  // Getter + Setter + Equals + HashCode + toString
 @AllArgsConstructor
 @NoArgsConstructor
 @Log4j2
@@ -55,7 +57,7 @@ public class RegisterDto extends AuditingAwareBaseDto implements Serializable {
     // Email
     @NotEmpty(message = "{register.email.validation.constraints.NotNull.message}")
     @Email(message = "{register.email.validation.constraints.regex.message}")
-    //@AnnotationUniqueEmailAddress // have to unique email address
+    @AnnotationUniqueEmailAddress // have to unique email address
     private String registerEmail;
 
     // Password
@@ -80,7 +82,7 @@ public class RegisterDto extends AuditingAwareBaseDto implements Serializable {
     // Kullanıcı üye olurken kilitli olsun ancak mail onayı ile aktifleştirilsin
     public Boolean isAccountNonLocked;
 
-    // Kullanıcı hesabını pasif duruma getirme
+    // Kullanıcı hesabını pasit duruma getirme
     public Boolean isAccountNonExpired;
 
     // Kullanıcı Hesap Bilgi Süresi (Authorization)

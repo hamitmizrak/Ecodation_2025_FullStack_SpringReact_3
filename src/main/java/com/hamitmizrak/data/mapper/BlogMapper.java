@@ -7,11 +7,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class BlogMapper {
 
-    // Entity ==> DTO
     public BlogDto toDto(BlogEntity e) {
-        // Entity boşsa
         if (e == null) return null;
-
         return BlogDto.builder()
                 .blogId(e.getBlogId())
                 .header(e.getHeader())
@@ -19,15 +16,12 @@ public class BlogMapper {
                 .content(e.getContent())
                 .image(e.getImage())
                 .systemCreatedDate(e.getSystemCreatedDate())
-                .blogCategoryDto(BlogCategoryMapper.toDto(e.getBlogCategoryEntity()))
+                .blogCategoryDto(BlogCategoryMapper.toDto(e.getBlogCategoryBlogEntity()))
                 .build();
     }
 
-    // Entity ==> DTO
-    public BlogEntity toEntiy(BlogDto d) {
-        // Dto boşsa
+    public BlogEntity toEntity(BlogDto d) {
         if (d == null) return null;
-
         return BlogEntity.builder()
                 .blogId(d.getBlogId())
                 .header(d.getHeader())
@@ -36,5 +30,4 @@ public class BlogMapper {
                 .image(d.getImage())
                 .build();
     }
-
-} //end BlogMapper
+}

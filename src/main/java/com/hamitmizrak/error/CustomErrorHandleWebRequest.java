@@ -1,16 +1,16 @@
 package com.hamitmizrak.error;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.boot.web.error.ErrorAttributeOptions;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
+import lombok.RequiredArgsConstructor; // Lombok: Constructor injection için
+import lombok.extern.log4j.Log4j2;      // Lombok: Loglama için
+import org.springframework.boot.web.error.ErrorAttributeOptions; // Hata attribute seçenekleri
+import org.springframework.boot.web.servlet.error.ErrorAttributes; // Spring'in error attribute'ları
+import org.springframework.boot.web.servlet.error.ErrorController; // ErrorController interface
+import org.springframework.validation.FieldError; // Validation hataları için
+import org.springframework.web.bind.annotation.CrossOrigin; // CORS
+import org.springframework.web.bind.annotation.GetMapping; // GET endpoint mapping
+import org.springframework.web.bind.annotation.RequestMapping; // Generic endpoint mapping
+import org.springframework.web.bind.annotation.RestController; // RestController
+import org.springframework.web.context.request.WebRequest; // HTTP request abstraction
 
 import java.util.HashMap;
 import java.util.List;

@@ -17,156 +17,140 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-// LOMBOK
 @RequiredArgsConstructor
 @Log4j2
-
-// Asıl  İş Yükünü Yapn Yer
 @Service
 public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
 
-    // Injection
-    private final IBlogRepository iBlogRepository;
-    private final IBlogCategoryRepository iBlogCategoryRepository;
 
-    // Resim silmesinde dosya temizliği için kullanmak
+    private final IBlogRepository blogRepo;
+    private final IBlogCategoryRepository categoryRepo;
+
+    // Silmede dosya temizliği için kullanıyoruz
     private final ImageService imageService;
 
-    /// ///////////////////////////////////////////////////////////////////////////////
-    /// MAPPER
+    // ---------- IModelMapperService ----------
     @Override
     public BlogDto entityToDto(BlogEntity e) {
-        // 1.YOL
-        // return modelMapperBean.modelMapperMethod().map(e,BlogDto.class);
-
-        // 2.YOL
         return BlogMapper.toDto(e);
     }
 
     @Override
     public BlogEntity dtoToEntity(BlogDto d) {
-        // 1.YOL
-        // return modelMapperBean.modelMapperMethod().map(BlogDto,BlogEntity.class);
-
-        // 2.YOL
-        return BlogMapper.toEntiy(d);
+        return BlogMapper.toEntity(d);
     }
 
+    // ---------- ICrudService ----------
 
-    /// ///////////////////////////////////////////////////////////////////////////////
-    /// SPEED
-    @Override
-    @Transactional
-    public String blogSpeedData(Integer data) {
-        return data+" tane blog category oluşturuldu.";
-    }
 
-    // DELETE ALL
-    @Override
-    @Transactional
-    public String blogDeleteAll() {
-        iBlogRepository.deleteAll();
-        return "blog category silindi.";
-    }
 
-    /// ///////////////////////////////////////////////////////////////////////////////
-    /// VALIDATE
-    private void validate(BlogDto dto,  boolean creating){
-        if(dto==null) throw new HamitMizrakException("Blog verisi boş");
-
-        if(creating){
-            if(dto.getHeader()==null || dto.getHeader().isBlank()) throw new HamitMizrakException("Header verisi zorunlu");
-            if(dto.getTitle()==null || dto.getTitle().isBlank()) throw new HamitMizrakException("Title verisi zorunlu");
-            if(dto.getContent()==null || dto.getContent().isBlank()) throw new HamitMizrakException("Contnent verisi zorunlu");
-        }
-    }
-
-    /// ///////////////////////////////////////////////////////////////////////////////
-    /// CRUD
-    /// CREATE (BLOG)
     @Override
     @Transactional
     public BlogDto objectServiceCreate(BlogDto d) {
-        validate(d,true);
+        validate(d, true);
 
-        // Kategori Bul
-        Long catId= d.getBlogCategoryDto()!=null ? d.getBlogCategoryDto().getCategoryId():null;
-        if(catId==null)throw  new HamitMizrakException("Kategori Seçiniz");
+        // Kategori bul
+        Long catId = d.getBlogCategoryDto() != null ? d.getBlogCategoryDto().getCategoryId() : null;
+        if (catId == null) throw new HamitMizrakException("Kategori seçiniz");
+        BlogCategoryEntity cat = categoryRepo.findById(catId)
+                .orElseThrow(() -> new _404_NotFoundException(catId + " id'li kategori bulunamadı"));
 
-        BlogCategoryEntity blogCategoryEntity=iBlogCategoryRepository.findById(catId).orElseThrow(()-> new _404_NotFoundException(catId+ " id'li kategori bulunamadı"));
+        BlogEntity e = dtoToEntity(d);
+        e.setBlogCategoryBlogEntity(cat);
 
-        BlogEntity blogEntity = dtoToEntity(d);
-        blogEntity.setBlogCategoryEntity(blogCategoryEntity);
-
-        BlogEntity saved= iBlogRepository.save(blogEntity);
-        return  entityToDto(saved);
+        BlogEntity saved = blogRepo.save(e);
+        return entityToDto(saved);
     }
 
-
-    // LIST (BLOG)
     @Override
     public List<BlogDto> objectServiceList() {
-        return iBlogRepository
-                .findAll()
-                .stream()
-                .map(this::entityToDto)
-                .toList();
+        return blogRepo.findAll().stream().map(this::entityToDto).toList();
     }
 
-    // FIND (BLOG)
     @Override
     public BlogDto objectServiceFindById(Long id) {
-        BlogEntity find= iBlogRepository.findById(id)
-                .orElseThrow(() -> new _404_NotFoundException(id +" id'li blog bulunamadi"));
-        return entityToDto(find);
+        BlogEntity e = blogRepo.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id + " id'li blog bulunamadı"));
+        return entityToDto(e);
     }
 
-    // UPDATE (BLOG)
     @Override
     @Transactional
     public BlogDto objectServiceUpdate(Long id, BlogDto d) {
-        // Önce Bul
-        // BlogDto find= objectServiceFindById(id);
-        BlogEntity find= iBlogRepository.findById(id)
-                .orElseThrow(() -> new _404_NotFoundException(id +" id'li blog bulunamadi"));
+        BlogEntity e = blogRepo.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id + " id'li blog bulunamadı"));
 
         // Alan bazlı güncelleme
-        if(d.getHeader()!=null && !d.getHeader().isBlank()) find.setHeader(d.getHeader());
-        if(d.getTitle()!=null && !d.getTitle().isBlank()) find.setTitle(d.getTitle());
-        if(d.getContent()!=null && !d.getContent().isBlank()) find.setContent(d.getContent());
-        if(d.getImage()!=null && !d.getImage().isBlank()) find.setImage(d.getImage());
+        if (d.getHeader() != null && !d.getHeader().isBlank()) e.setHeader(d.getHeader());
+        if (d.getTitle()  != null && !d.getTitle().isBlank())  e.setTitle(d.getTitle());
+        if (d.getContent()!= null && !d.getContent().isBlank())e.setContent(d.getContent());
+        if (d.getImage()  != null && !d.getImage().isBlank())  e.setImage(d.getImage());
 
-        // Kategori Değişimi
-        if(d.getBlogCategoryDto()!=null && d.getBlogCategoryDto().getCategoryId()!=null){
-            Long  catId= d.getBlogCategoryDto().getCategoryId();
-            BlogCategoryEntity blogCategoryEntity= iBlogCategoryRepository.findById(catId).orElseThrow(()-> new _404_NotFoundException(catId+" id'li kategori bulunamadı"));
-            find.setBlogCategoryEntity(blogCategoryEntity);
+        // Kategori değişimi
+        if (d.getBlogCategoryDto() != null && d.getBlogCategoryDto().getCategoryId() != null) {
+            Long catId = d.getBlogCategoryDto().getCategoryId();
+            BlogCategoryEntity cat = categoryRepo.findById(catId)
+                    .orElseThrow(() -> new _404_NotFoundException(catId + " id'li kategori bulunamadı"));
+            e.setBlogCategoryBlogEntity(cat);
         }
 
-        return entityToDto(iBlogRepository.save(find));
+        return entityToDto(blogRepo.save(e));
     }
 
-    // DELETE (BLOG)
     @Override
     @Transactional
     public BlogDto objectServiceDelete(Long id) {
-        // Önce Bul
-        //BlogDto find= objectServiceFindById(id);
-        BlogEntity find= iBlogRepository.findById(id)
-                .orElseThrow(() -> new _404_NotFoundException(id +" id'li blog bulunamadi"));
+        BlogEntity e = blogRepo.findById(id)
+                .orElseThrow(() -> new _404_NotFoundException(id + " id'li blog bulunamadı"));
 
-        // Kayıtlı ilişkili dosya varsa sil
-        String img= find.getImage();
-        if(img!=null && img.startsWith("/upload/")){
-            try {
-                imageService.deleteByUrl(img);
-            }catch (Exception e){
-                System.out.println("Resim silmeden bir hata meydana geldi "+e.getMessage());
-            }
+        // Kayıtla ilişkili dosya varsa sil (sadece /upload/... ise)
+        String img = e.getImage();
+        if (img != null && img.startsWith("/upload/")) {
+            try { imageService.deleteByUrl(img); } catch (Exception ignored) { /* loglanabilir */ }
         }
 
-        BlogDto blogDto = entityToDto(find);
-        iBlogRepository.deleteById(id);
-        return blogDto;
+        BlogDto toReturn = entityToDto(e);
+        blogRepo.deleteById(id);
+        return toReturn;
     }
-} // end class BlogCategoryServicesImpl
+
+    // ---------- Extras ----------
+    @Transactional
+    @Override
+    public String blogSpeedData(Long count) {
+        BlogCategoryEntity cat = categoryRepo.findByCategoryNameIgnoreCase("Genel")
+                .orElseGet(() -> categoryRepo.save(BlogCategoryEntity.builder().categoryName("Genel").build()));
+
+        for (int i = 1; i <= count; i++) {
+            BlogEntity e = BlogEntity.builder()
+                    .header("Header " + i)
+                    .title("Title " + i)
+                    .content("Content " + i)
+                    .image("resim.png")
+                    .blogCategoryBlogEntity(cat)
+                    .build();
+            blogRepo.save(e);
+        }
+        return "Blog speed data eklendi: " + count;
+    }
+
+    @Override
+    @Transactional
+    public String blogAllDelete() {
+        blogRepo.deleteAll();
+        return "Tüm bloglar silindi";
+    }
+
+    // ---------- validate ----------
+    private void validate(BlogDto d, boolean creating) {
+        if (d == null) throw new HamitMizrakException("Blog verisi boş");
+        if (creating) {
+            if (d.getHeader() == null || d.getHeader().isBlank()) throw new HamitMizrakException("Header zorunlu");
+            if (d.getTitle()  == null || d.getTitle().isBlank())  throw new HamitMizrakException("Başlık zorunlu");
+            if (d.getContent()== null || d.getContent().isBlank())throw new HamitMizrakException("İçerik zorunlu");
+        }
+    }
+
+
+
+}

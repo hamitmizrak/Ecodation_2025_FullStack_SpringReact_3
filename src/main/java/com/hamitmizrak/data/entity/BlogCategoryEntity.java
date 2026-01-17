@@ -6,40 +6,30 @@ import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-// LOMBOK
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 @Log4j2
-
-// DATA
 @Entity
-@Table(name="blog_categories")
-public class BlogCategoryEntity  extends AuditingAwareBaseEntity implements Serializable {
+@Table(name = "blog_categories")
+public class BlogCategoryEntity extends AuditingAwareBaseEntity {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
-
-    // Field
-
-    // ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
-
-    // CATEGORY NAME
-    @Column(nullable = false, unique = true,length = 200,name = "category_name")
+    @Column(nullable = false, unique = true, length = 150)
     private String categoryName;
 
-    // SYSTEM DATE
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date systemCreatedDate;
-} // end BlogCategoryEntity
+
+    // BlogCategory(1) - Blog(N)
+    // BlogEntity içindeki alan adı "blogCategoryBlogEntity" olduğu için mappedBy aynı tutuldu
+    @OneToMany(mappedBy = "blogCategoryBlogEntity", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<BlogEntity> blogCategoryBlogEntityList;
+}
