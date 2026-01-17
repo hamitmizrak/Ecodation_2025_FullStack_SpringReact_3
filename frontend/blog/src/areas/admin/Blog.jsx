@@ -123,9 +123,10 @@ function Blog() {
     // API_BASE: http://localhost:4444
     // ENDPOINTS.BLOGS: /blog/api/v1.0.0/list
     try {
-      const res = await axios.get(`${API_BASE}${ENDPOINTS.BLOGS}`);
+      const res = await axios.get(`${API_BASE}${ENDPOINTS.BLOGS.LIST}`);
       const data = extractData(res);
       const arr = Array.isArray(data) ? data : Array.isArray(data?.content) ? data.content : [];
+      setItems(arr);
     } catch (err) {
       showError?.('Blog Listesi Yüklenemedi') ?? console.error(err);
     } finally {
@@ -143,6 +144,7 @@ function Blog() {
       const res = await axios.get(`${API_BASE}${ENDPOINTS.BLOG_CATEGORY.LIST}`);
       const data = extractData(res);
       const arr = Array.isArray(data) ? data : Array.isArray(data?.content) ? data.content : [];
+      setCats(arr);
     } catch (err) {
       showError?.('Blog Kategori Listesi Yüklenemedi') ?? console.error(err);
     } finally {
@@ -212,6 +214,7 @@ function Blog() {
   // ---------- onChange ----------
   // ONCHANGE HELPERS
   const resetForm = () => {
+    // Formu sıfırla
     setForm({
       header: '',
       title: '',
@@ -219,6 +222,7 @@ function Blog() {
       categoryId: '',
       image: '',
     });
+    // Hataları sıfırla
     setFormErrors({});
     setFile(null);
     // Resim URL boşalt
@@ -349,6 +353,32 @@ function Blog() {
     setFormErrors(errors);
     return errors;
   };
+
+  // ----------- Build Payloads  -----------
+  const jsonBody = () => ({
+    header: form.header.trim(),
+    title: form.title.trim(),
+    content: form.content.trim(),
+    image: form.image?.trim() || 'resim.png',
+    blogCategoryId: {
+      // categoryId: parseInt(form.categoryId),
+      categoryId: Number(form.categoryId),
+    },
+  });
+
+  // application/json payload
+  const multipartBody = () => {
+    const fd = new FormData();
+    const blob = new Blob([JSON.stringify(jsonBody())], { type: 'application/json' });
+    fd.append('blog', blob);
+    if (file) {
+      fd.append('file', file);
+    }
+    return fd;
+  };
+
+
+  
 
   /////////////////////////////////////////////////////////////////////////////////
   // RETURN
