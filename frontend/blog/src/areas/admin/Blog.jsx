@@ -526,11 +526,45 @@ function Blog() {
           <div className="container py-4">
               <div className="d-flex align-items-center justify-content-between mb-3">
                   <h2 className="mb-0">Bloglar</h2>
-                  <div className="d-flex-gap-2"><input type="text"/>
-                      <button className="btn btn-primary">Yeni Blog</button>
+                  <div className="d-flex gap-2">
+                      <input
+                          placeholder="Ara (ID/Başlık/İçerik/Kategori)"
+                          className="form-control"
+                          style={{minWidth:280}}
+                          value={query}
+                          onChange={(e)=>{
+                              setQuery(e.target.value)
+                              setPage(1)
+                          }}
+                      />
+                      <button className="btn btn-primary" onClick={openCreate}>Yeni Blog</button>
                   </div>
               </div>
-          </div>
+
+              {/*TABLE*/}
+              <div>
+                  <table-responsive>
+                      <table className="table table-striped table-border table alig-middle">
+                          {/*HEAD*/}
+                          <thead>
+                          <tr>
+                              <th style={{minWidth:90}}>ID <SortBtn k="blogId"/></th>
+                              <th style={{minWidth:150}}>Görsel</th>
+                              <th>Başlık <SortBtn k="header"/></th>
+                              <th>Alt Başlık <SortBtn k="title"/></th>
+                              <th>İçerik <SortBtn k="content"/></th>
+                              <th>Kategori <SortBtn k="categoryName"/></th>
+                              <th style={{minWidth:230}}>Oluşturma <SortBtn k="systemCreatedDate" /></th>
+                              <th style={{width:160}}>İşlemler</th>
+                          </tr>
+                          </thead>
+                      </table>
+                  </table-responsive>
+              </div>
+
+
+          </div>  {/*end container*/}
+
 
       </>
   ); // end Return
