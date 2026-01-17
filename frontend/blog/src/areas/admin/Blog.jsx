@@ -335,7 +335,7 @@ function Blog() {
   };
 
   // ----------- Validate Form -----------
-  const validateForm = () => {
+  const validateBlog = () => {
     // HATALARI SIFIRLA
     const errors = {};
 
@@ -367,7 +367,7 @@ function Blog() {
   });
 
   // application/json payload
-  const multipartBody = () => {
+  const buildMultipart = () => {
     const fd = new FormData();
     const blob = new Blob([JSON.stringify(jsonBody())], { type: 'application/json' });
     fd.append('blog', blob);
@@ -377,10 +377,131 @@ function Blog() {
     return fd;
   };
 
+  // ----------- CRUD  -----------
+  // -----------------------------
 
-  
+  // CREATE
+  const submitCreate = async (event) => {
+    // Browser default davranışını engelle
+    event.preventDefault();
 
-  /////////////////////////////////////////////////////////////////////////////////
+    // Form doğrulama
+    const errors = validateBlog();
+    setFormErrors(errors);
+
+    // Hata varsa devam etme
+    if (Object.keys(errors).length > 0) {
+      showError('Lütfen form hatalarını düzeltin.');
+      return;
+    }
+
+    // LOADING
+     setLoading(false);  
+
+    // TRY CATCH
+    try {
+      // Eğer File varsa multipart, yoksa json gönder
+      if (file) {
+        // MULTIPART:  header set ETME - tarayıcı boundary ekler
+        await axios.post(`${API_BASE}${ENDPOINTS.BLOGS.CREATE}`, buildMultipart());
+      } else {
+        // JSON
+        await axios.post(`${API_BASE}${ENDPOINTS.BLOGS.CREATE}`, jsonBody());
+      }
+      showSuccess(`Blog başarıyla oluşturuldu.`);
+      console.log(`Blog başarıyla oluşturuldu.`);
+      //closeCreate(); //4444
+      //fetchBlogs();
+    } catch (err) {
+      showError('Blog oluşturulamadı.') ?? console.error(err);
+      const msg = err?.response?.data?.message || 'Blog oluşturulamadı.';
+      showError?.(msg)?? console.error(err);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+      // Modal kapat
+      closeCreate();
+      // Listeyi yenile
+      fetchBlogs();
+    }
+  }; // end submitCreate
+
+  // UPDATE
+  const submitEdit = async (event) => {
+    // Browser default davranışını engelle
+    event.preventDefault();
+
+    // Form doğrulama
+    const errors = validateBlog();
+    setFormErrors(errors);
+
+    // Hata varsa devam etme
+    if (Object.keys(errors).length > 0) {
+      showError('Lütfen form hatalarını düzeltin.');
+      return;
+    }
+
+    // TRY CATCH
+    try {
+
+      // ID
+      const id = selected?.blogId || selected?.id;
+      if (!id) throw new Error('Geçersiz blog seçimi.');
+      if (id==null) throw new Error('Blog ID Yoktur.');
+
+      // Eğer File varsa multipart, yoksa json gönder
+      if (file) {
+        // MULTIPART:  header set ETME - tarayıcı boundary ekler
+        await axios.post(`${API_BASE}${ENDPOINTS.BLOGS.UPDATE(id)}`, buildMultipart());
+      } else {
+        // JSON
+        await axios.post(`${API_BASE}${ENDPOINTS.BLOGS.UPDATE(id)}`, jsonBody());
+      }
+      showSuccess(`Blog başarıyla güncellendi.`);
+      console.log(`Blog başarıyla güncellendi.`);
+    } catch (err) {
+      showError('Blog oluşturulamadı.') ?? console.error(err);
+      const msg = err?.response?.data?.message || 'Blog oluşturulamadı.';
+      showError?.(msg) ?? console.error(err);
+      setLoading(true);
+    } finally {
+      setLoading(false);
+      // Modal kapat
+      closeEdit();
+      // Listeyi yenile
+      fetchBlogs();
+    }
+  }; // end submitCreate
+
+  // DELETE
+  const submitDelete = async () => {
+    // LOADING
+    setLoading(true);
+
+    // TRY CATCH
+    try {
+      // ID
+      const id = selected?.blogId || selected?.id;
+      if (!id) throw new Error('Geçersiz blog seçimi.');
+      if (id == null) throw new Error('Blog ID Yoktur.');
+
+      // API ÇAĞRI
+      await axios.delete(`${API_BASE}${ENDPOINTS.BLOGS.DELETE(id)}`);
+      showSuccess?.(`Blog başarıyla silindi.`) ?? console.log(`Blog başarıyla silindi.`);
+    } catch (err) {
+      showError('Blog silinemedi.') ?? console.error(err);
+      const msg = err?.response?.data?.message || 'Blog silinemedi.';
+      showError?.(msg) ?? console.error(err);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+      // Modal kapat
+      closeDelete();
+      // Listeyi yenile
+      fetchBlogs();
+    }
+  }; // end submitDelete
+
   // RETURN
   return <>Blog</>;
 }
