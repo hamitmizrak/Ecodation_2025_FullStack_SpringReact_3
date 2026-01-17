@@ -653,6 +653,23 @@ function Blog() {
                     </div>
                 </div>
 
+                {/*CREATE MODAL*/}
+                {/*{showCreate && (
+                    <div
+                        className="modal fade show d-block"
+                        tabIndex={-1}
+                        role="dialog"
+                        style={{zIndex:1050}}
+                        onClick={closeCreate}>
+                        <div className="modal-dialog" onClick={(e)=> e.stopPropagation()}>
+                            <div className="modal-content">
+                                <form action=""></form>
+                            </div>
+                        </div>
+
+                        <div
+                )}*/}
+
             </div>
             {/*end container*/}
 
