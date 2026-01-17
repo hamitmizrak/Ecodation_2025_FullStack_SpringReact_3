@@ -542,8 +542,7 @@ function Blog() {
                 </div>
 
                 {/*TABLE*/}
-                <div>
-                    <table-responsive>
+                <div className="table-responsive">
                         <table className="table table-striped table-border table alig-middle">
                             {/*HEAD*/}
                             <thead>
@@ -612,9 +611,47 @@ function Blog() {
                             }
                             </tbody>
                         </table>
-                    </table-responsive>
                 </div>
 
+                {/* Pagination */}
+                <div className="d-flex justify-content-between align-items-center mt-2">
+                    <div>
+                        Toplam <b>{total}</b> kayıt, Sayfa <b>{currentPage}</b> / <b>{pageCount}</b>
+                    </div>
+                    <div className="d-flex align-items-center gap-2">
+                        <select
+                            className="form-select"
+                            value={pageSize}
+                            onChange={(e) => {
+                                setPageSize(parseInt(e.target.value || '10', 10));
+                                setPage(1);
+                            }}
+                            style={{ width: 90 }}
+                        >
+                            {[5, 10, 20, 50, 100].map((n) => (
+                                <option key={n} value={n}>
+                                    {n}/sayfa
+                                </option>
+                            ))}
+                        </select>
+                        <div className="btn-group">
+                            <button
+                                className="btn btn-outline-secondary"
+                                disabled={currentPage <= 1}
+                                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                            >
+                                ‹ Önceki
+                            </button>
+                            <button
+                                className="btn btn-outline-secondary"
+                                disabled={currentPage >= pageCount}
+                                onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+                            >
+                                › Sonraki
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             {/*end container*/}
