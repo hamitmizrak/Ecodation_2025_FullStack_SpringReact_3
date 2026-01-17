@@ -377,6 +377,24 @@ function Blog() {
     return fd;
   };
 
+    // ---------- UI ----------
+    const SortBtn = ({ k, children }) => (
+        <button
+            type="button"
+            className="btn btn-link p-0 ms-1"
+            title="Sırala"
+            onClick={() => {
+                if (sortKey === k) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+                else {
+                    setSortKey(k);
+                    setSortDir('asc');
+                }
+            }}
+        >
+            {children} {sortKey === k ? (sortDir === 'asc' ? '▲' : '▼') : ''}
+        </button>
+    );
+
   // ----------- CRUD  -----------
   // -----------------------------
 
@@ -503,8 +521,20 @@ function Blog() {
   }; // end submitDelete
 
   // RETURN
-  return <>Blog</>;
-}
+  return (
+      <>
+          <div className="container py-4">
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                  <h2 className="mb-0">Bloglar</h2>
+                  <div className="d-flex-gap-2"><input type="text"/>
+                      <button className="btn btn-primary">Yeni Blog</button>
+                  </div>
+              </div>
+          </div>
+
+      </>
+  ); // end Return
+} // end Blog
 
 // I18N (InternationalizatioN) Desteği
 export default withTranslation()(Blog);
