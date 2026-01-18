@@ -343,6 +343,7 @@ export default function Blog() {
 
     const confirmDelete = async () => {
         try {
+            //alert("Silme alanı")
             const id = selected?.blogId ?? selected?.id;
             if (id == null) throw new Error('Blog ID yok.');
             await axios.delete(`${API_BASE}${ENDPOINTS.BLOG.DELETE(id)}`);
@@ -571,7 +572,6 @@ export default function Blog() {
                                                     name="header"
                                                     onChange={onChange}
                                                     required
-                                                    onFocus={true}
                                                     class={`form-control ${formError.header ? 'is-invalid':''}`}
                                                 />
                                                 {formError.header && (
@@ -588,7 +588,6 @@ export default function Blog() {
                                                     name="title"
                                                     onChange={onChange}
                                                     required
-                                                    onFocus={false}
                                                     class={`form-control ${formError.title ? 'is-invalid':''}`}
                                                 />
                                                 {formError.title && (
@@ -600,8 +599,7 @@ export default function Blog() {
                                             <div className="col-md-12">
                                                 <label htmlFor="content" className="form-label">İçerik</label>
                                                 <textarea
-                                                    rows={5}
-                                                    cols={10}
+                                                    rows={8}
                                                     name="content"
                                                     value={form.content}
                                                     required
@@ -718,7 +716,7 @@ export default function Blog() {
                                     {/*MODAL HEADER*/}
                                     <div className="modal-header">
                                         <h5 className="modal-title">Blog Güncelle</h5>
-                                        <button type="button" className="btn-close" onClick={closeCreate}></button>
+                                        <button type="button" className="btn-close" onClick={closeEdit}></button>
                                     </div>
 
                                     {/*MODAL BODY*/}
@@ -734,7 +732,6 @@ export default function Blog() {
                                                     name="header"
                                                     onChange={onChange}
                                                     required
-                                                    onFocus={true}
                                                     value={form.header}
                                                     class={`form-control ${formError.header ? 'is-invalid':''}`}
                                                 />
@@ -752,7 +749,6 @@ export default function Blog() {
                                                     name="title"
                                                     onChange={onChange}
                                                     required
-                                                    onFocus={false}
                                                     value={form.title}
                                                     class={`form-control ${formError.title ? 'is-invalid':''}`}
                                                 />
@@ -766,7 +762,6 @@ export default function Blog() {
                                                 <label htmlFor="content" className="form-label">İçerik</label>
                                                 <textarea
                                                     rows={5}
-                                                    cols={10}
                                                     name="content"
                                                     value={form.content}
                                                     required
@@ -782,7 +777,7 @@ export default function Blog() {
                                             <div className="col-md-6">
                                                 <label htmlFor="url" className="form-label">Resim URL</label>
                                                 <input
-                                                    name="url"
+                                                    name="image"
                                                     className="form-control"
                                                     value={form.image}
                                                     onChange={onChange}
@@ -794,7 +789,7 @@ export default function Blog() {
                                             {/*IMAGE (Görsel Alanı)*/}
                                             <div className="col-md-6">
                                                 <label htmlFor="blog-image-file" className="form-label">Resim
-                                                    Ekle</label>
+                                                    Güncelle</label>
                                                 <input
                                                     type="file"
                                                     name="image"
@@ -940,56 +935,41 @@ export default function Blog() {
                 )}{/* End View Modal */}
 
 
-                {/*DELETE MODAL*/}
+                {/* DELETE MODAL */}
                 {showDelete && selected && (
                     <div
                         className="modal fade show d-block"
-                        role="dialog"
-                        style={{zIndex: 1050}}
-                        onClick={closeDelete}
                         tabIndex={-1}
+                        role="dialog"
+                        style={{ zIndex: 1050 }}
+                        onClick={closeDelete}
                     >
-                        <div className="modal-dialog modal-lg" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
                             <div className="modal-content">
-
-                                {/*MODAL HEADER*/}
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Blog Silme</h5>
-                                    <button type="button" className="btn-close" onClick={closeDelete}></button>
+                                    <h5 className="modal-title text-danger">Silme Onayı</h5>
+                                    <button type="button" className="btn-close" onClick={closeDelete} />
                                 </div>
-
-                                {/*MODAL BODY*/}
                                 <div className="modal-body">
-                                    <div className="mb-2 text-muted">
-                                        <b> {selected.blogId ?? selected.id}</b>
-                                    </div>
-
                                     <div className="mb-2">
-                                        <b> {selected.title}</b> Başlıklı blogu silmek istediğinizden emin misiniz ?
+                                        <b>{selected.title}</b> Blog silmek istediğinize emin misiniz?
                                     </div>
-
-                                    <div className="mb-2">
-                                        <b>BLOG KATEGORI: </b> {selected.blogCategoryDto?.categoryName ?? "-"}
-                                    </div>
-
-                                    <div className="mb-2">
-                                        <b>Oluşturma: </b> {fmtDate(selected.systemCreatedDate)}
+                                    <div className="text-muted">
+                                        <b>ID:</b> {selected.blogId ?? selected.id}
                                     </div>
                                 </div>
-
-                                {/*MODAL FOOTER*/}
                                 <div className="modal-footer">
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary"
-                                        onClick={closeDelete}>Silmekten Vazgeç
+                                    <button className="btn btn-secondary" onClick={closeDelete}>
+                                        Vazgeç
                                     </button>
-                                    <button class="btn btn-danger" onclick={confirmDelete}>Sil</button>
+                                    <button className="btn btn-danger" onClick={confirmDelete}>
+                                        Sil
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                )}{/* End View Modal */}
+                )}
 
 
                 {/* Global Backdrop */}
