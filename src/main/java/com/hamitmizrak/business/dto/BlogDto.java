@@ -27,6 +27,8 @@ public class BlogDto extends AuditingAwareBaseDto implements Serializable {
     @NotEmpty(message = "{blog.content.validation.constraints.NotNull.message}")
     private String content;
 
+    private String url;
+
     /** About’ta imageUrl vardı; React’inle uyum için Blog’ta alan adı 'image' olarak bırakıldı. */
     @Builder.Default
     private String image = "resim.png";

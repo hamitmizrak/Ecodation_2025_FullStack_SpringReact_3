@@ -2429,7 +2429,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")  // Tüm URL'ler için geçerli
-                .allowedOrigins("http://localhost:3000")  // İzin verilen köken
+                .allowedOrigins("http://localhost:3001")  // İzin verilen köken
                 .allowedMethods("GET", "POST", "PUT", "DELETE")  // İzin verilen HTTP metodları
                 .allowedHeaders("*");  // İzin verilen başlıklar
     }
@@ -2472,7 +2472,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")  // Tüm URL'ler için geçerli
-                .allowedOrigins("http://localhost:3000")  // İzin verilen köken
+                .allowedOrigins("http://localhost:3001")  // İzin verilen köken
                 .allowedMethods("GET", "POST", "PUT", "DELETE")  // İzin verilen HTTP metodları
                 .allowedHeaders("*");  // İzin verilen başlıklar
     }
@@ -2503,7 +2503,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 3. **addCorsMappings(CorsRegistry registry)**: Bu metot, Cross-Origin Resource Sharing (CORS) yapılandırması sağlar. Bu yapılandırmada:
     - `addMapping("/**")`: Tüm URL'ler için CORS kısıtlamalarını uygular.
-    - `allowedOrigins("http://localhost:3000")`: Sadece `localhost:3000` kökeninden gelen istekleri kabul eder.
+    - `allowedOrigins("http://localhost:3001")`: Sadece `localhost:3001` kökeninden gelen istekleri kabul eder.
     - `allowedMethods("GET", "POST", "PUT", "DELETE")`: İzin verilen HTTP metodlarını tanımlar.
     - `allowedHeaders("*")`: Tüm başlıklara izin verir.
 

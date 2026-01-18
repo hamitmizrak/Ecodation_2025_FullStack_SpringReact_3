@@ -302,7 +302,7 @@ for project , Port
 
 | NAME       | PORT                                                  |
 | ---------- | ----------------------------------------------------- |
-| React JS   | [React][http://localhost:3000]                        |
+| React JS   | [React][http://localhost:3001]                        |
 | SPRING     | [Spring][http://localhost:9999]                       |
 | H2-CONSOLE | [H2][http://localhost:9999/h2-console]                |
 | SWAGGER    | [API DOCUMENT][http://localhost:9999/swagger-ui.html] |

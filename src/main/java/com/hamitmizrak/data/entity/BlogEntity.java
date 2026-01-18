@@ -29,6 +29,8 @@ public class BlogEntity extends AuditingAwareBaseEntity {
     @Column(nullable = false)
     private String content;
 
+    private String url;
+
     /** About ile paralel tutmak için isim 'image' (imageUrl değil). Relative URL: /upload/blog/... */
     @Column(nullable = false, length = 300)
     private String image;

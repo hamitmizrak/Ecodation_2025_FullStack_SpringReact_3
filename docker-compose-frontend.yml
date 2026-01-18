@@ -21,7 +21,7 @@ services:
       context: ./frontend/blog
       dockerfile: DockerfileFrontend
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./frontend/blog:/usr/src/app     # doğru context bağland
       - /usr/src/app/node_modules

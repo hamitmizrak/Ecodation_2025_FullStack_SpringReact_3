@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/email/api/v1.0.0")
 @CrossOrigin //CORS: Hatası
 //@CrossOrigin(origins = ProjectUrl.REACT_FRONTEND_PORT_URL)
-//@CrossOrigin(origins = "localhost:3000")
+//@CrossOrigin(origins = "localhost:3001")
 public class EmailApiImpl implements IEmailApi<EmailDto> {
 
     // Injection

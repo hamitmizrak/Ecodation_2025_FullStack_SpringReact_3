@@ -50,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
         corsRegistry
                 .addMapping("/**") //Tüm pointeler için CORS geçerli olsun
                 //.allowedOrigins("*") // Bütün Kaynaklara izin ver
-                .allowedOrigins("http://localhost:3000") // Sadece Belirli Kaynaklara izin ver
+                .allowedOrigins("http://localhost:3001") // Sadece Belirli Kaynaklara izin ver
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // İzin verilen Http Metotları
                 .allowedHeaders("*") //  izin verilen başlılar => Tüm başlıkları kabul et,
                 .allowCredentials(true); // Kimlik doğrulama bilgilerinde izin ver(Cookie, header, authorization vs)

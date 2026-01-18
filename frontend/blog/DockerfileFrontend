@@ -2,7 +2,7 @@
 # mvn clean package -DskipTests
 
 # docker image build -t imageAdi .
-# docker container run -d -p 3000:3000 --rm --name blog
+# docker container run -d -p 3001:3001 --rm --name blog
 
 # React için Node tabanlı imaj
 FROM node:18
@@ -13,7 +13,7 @@ LABEL maintainer="hamitmizrak@gmail.com"
 # Çevresel değişkenler
 ENV APP_NAME="Full Stack React JS"
 ENV VERSION="v1.0.0"
-ENV PORT="3000"
+ENV PORT="3001"
 
 # Çevresel Değişkenleri RUN
 RUN echo "App Name: $APP_NAME"
@@ -33,7 +33,7 @@ RUN npm install
 COPY . .
 
 # Geliştirme portunu aç
-EXPOSE 3000
+EXPOSE 3001
 
 # React uygulamasını başlat
 CMD ["npm", "start"]
@@ -44,7 +44,7 @@ CMD ["npm", "start"]
 # HEALTHCHECK: Sağlık kontrolünü Eklesin
 # HEALTHCHECK: Bu container çalışıyor mu ?
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3000/ || exit 1
+    CMD curl -f http://localhost:3001/ || exit 1
 
 
 

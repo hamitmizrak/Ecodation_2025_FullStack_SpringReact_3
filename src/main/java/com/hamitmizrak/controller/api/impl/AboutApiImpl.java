@@ -28,7 +28,7 @@ import java.util.List;
 
 // API
 @RestController
-@CrossOrigin(origins = FrontEnd.REACT_URL) // http://localhost:3000
+@CrossOrigin(origins = FrontEnd.REACT_URL) // http://localhost:3001
 @RequestMapping("/about/api/v1.0.0")
 public class AboutApiImpl implements IAboutApi<AboutDto> {
 

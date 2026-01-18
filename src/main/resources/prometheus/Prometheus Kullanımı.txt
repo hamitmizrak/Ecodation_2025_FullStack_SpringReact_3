@@ -4,6 +4,6 @@ http://localhost:9090/
 http://localhost:9090/targets
 
 # Grafana
-http://localhost:3000/login
+http://localhost:3001/login
 username: admin
 password: admin

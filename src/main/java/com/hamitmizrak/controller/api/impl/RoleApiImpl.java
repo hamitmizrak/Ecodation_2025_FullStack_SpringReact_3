@@ -20,7 +20,7 @@ import java.util.List;
 @Log4j2
 // @CrossOrigin //CORS: Hatası
 //@CrossOrigin(origins = ProjectUrl.REACT_FRONTEND_PORT_URL)
-//@CrossOrigin(origins = "localhost:3000")
+//@CrossOrigin(origins = "localhost:3001")
 public class RoleApiImpl implements IRoleApi<RoleDto> {
 
     // Injection

@@ -28,7 +28,7 @@ import java.util.Optional;
 @Log4j2
 @RestController
 @RequestMapping("/register/api/v1.0.0")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200"}) // Frontend portları
+@CrossOrigin(origins = {"http://localhost:3001", "http://localhost:4200"}) // Frontend portları
 public class RegisterApiImpl implements IRegisterApi<RegisterDto> {
 
     // Injection
@@ -246,7 +246,7 @@ public class RegisterApiImpl implements IRegisterApi<RegisterDto> {
                 "  </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "    <p style='padding:4rem;'>Üyeliğiniz Aktif olunmuştur.  <a href='http://localhost:3000'>Ana sayfa için tıklayınız </a></p>\n" +
+                "    <p style='padding:4rem;'>Üyeliğiniz Aktif olunmuştur.  <a href='http://localhost:3001'>Ana sayfa için tıklayınız </a></p>\n" +
                 "</body>\n" +
                 "</html>";
         return ResponseEntity.ok(html);
