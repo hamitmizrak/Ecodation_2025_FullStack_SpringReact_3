@@ -1,5 +1,5 @@
 # docker image build -t imageAdi .
-# docker container run -d -p 4444:4444 --rm --name my_imageName
+# docker container run -d -p 9999:9999 --rm --name my_imageName
 
 # DockerHub push
 #1.adım: DockerfileBackend ile image oluştur
@@ -19,7 +19,7 @@ LABEL maintainer="hamitmizrak@gmail.com"
 # Çevresel Değişkenler
 ENV APP_NAME="Full Stack 11"
 ENV VERSION="v1.0.0"
-ENV PORT="4444"
+ENV PORT="9999"
 
 # Çıktı almak
 ## RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
@@ -37,7 +37,7 @@ RUN echo   "Port: $PORT"
 VOLUME /tmp
 
 # Port
-EXPOSE 4444
+EXPOSE 9999
 
 # Projeki jar dosyasının yerini bulmak
 ARG JAR_FILE=/target/*.jar
@@ -51,7 +51,7 @@ ADD ${JAR_FILE} spring_react
 # Eğer bu 3s komutu belirtilenin dışına çıkarsa Docker sağlıksız olarak işaretlenir
 # CMD wget --quiet --tries=1 --spider http://localhost : wget ile localhost istek atmak
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --quiet --tries=1 --spider http://localhost:4444 || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost:9999 || exit 1
 
 # Docker konteynarı çalışması sırasında varsılan çalışacak komutlar
 # Uygulamayı başlatma komut dizinidir
@@ -70,9 +70,9 @@ ENTRYPOINT ["java","-jar","/spring_react"]
 # docker container ls -a
 # docker ps
 # docker ps -a
-# docker container run -p 2222:4444 blog
-# docker container run -p 3333:4444 --name malatya blog
-# docker container run -d -p 5555:4444 --name malatya2 blog
-# docker container run --rm -d -p 6666:4444 --name malatya3 blog
+# docker container run -p 2222:9999 blog
+# docker container run -p 3333:9999 --name malatya blog
+# docker container run -d -p 5555:9999 --name malatya2 blog
+# docker container run --rm -d -p 6666:9999 --name malatya3 blog
 # docker container prune
 # docker container exec -it containerID bash

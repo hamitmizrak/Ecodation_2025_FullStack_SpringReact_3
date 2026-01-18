@@ -76,7 +76,7 @@ public class RegisterDto extends AuditingAwareBaseDto implements Serializable {
 
     private String imageUrl;        // Örn: /upload/register/2025/08/24/uuid.jpg
     // İsterseniz response tarafında doldurmak için:
-    private String fullImageUrl;    // Örn: http://localhost:4444/upload/...
+    private String fullImageUrl;    // Örn: http://localhost:9999/upload/...
     /////////////////////////////////////////////////////////////////////////////////
     // USER DETAILS
     // Kullanıcı üye olurken kilitli olsun ancak mail onayı ile aktifleştirilsin

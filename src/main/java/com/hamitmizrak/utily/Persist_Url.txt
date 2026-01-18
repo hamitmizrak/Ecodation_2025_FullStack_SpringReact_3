@@ -1,9 +1,9 @@
 Daimi URL
-http://localhost:4444
-http://localhost:4444/h2-console
-http://localhost:4444/swagger-ui/index.html
-http://localhost:4444/actuator
-http://localhost:4444/actuator/health
+http://localhost:9999
+http://localhost:9999/h2-console
+http://localhost:9999/swagger-ui/index.html
+http://localhost:9999/actuator
+http://localhost:9999/actuator/health
 
 ######################################################
 Banner Ascii

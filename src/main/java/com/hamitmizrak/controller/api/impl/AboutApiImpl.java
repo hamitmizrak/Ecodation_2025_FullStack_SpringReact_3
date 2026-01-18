@@ -46,7 +46,7 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
     //////////////////////////////////////////////////////////////////////////////////////////
     // CREATE
     // İster resimli ister resimsiz yani opsiyonel (Şimdiki resimsiz)
-    // http://localhost:4444/about/api/v1.0.0/create
+    // http://localhost:9999/about/api/v1.0.0/create
     @Override
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResult<?>> objectApiCreate(@Valid @RequestBody AboutDto aboutDto) {
@@ -60,10 +60,10 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
 
 
     // İster resimli ister resimsiz yani opsiyonel (Şimdiki resimsiz)
-    // http://localhost:4444/about/api/v1.0.0/create
+    // http://localhost:9999/about/api/v1.0.0/create
     /**
      * CREATE (Multipart) — Opsiyonel dosya ile
-     * POST http://localhost:4444/about/api/v1.0.0/create
+     * POST http://localhost:9999/about/api/v1.0.0/create
      * Content-Type: multipart/form-data
      * form-data alanları:
      *  - dto  (Text)   -> geçerli JSON metni
@@ -91,7 +91,7 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
     }
 
     // LIST
-    // http://localhost:4444/about/api/v1.0.0/list
+    // http://localhost:9999/about/api/v1.0.0/list
     @Override
     @GetMapping(value="/list")
     public ResponseEntity<ApiResult<List<AboutDto>>> objectApiList() {
@@ -104,7 +104,7 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
     }
 
     // FIND
-    // http://localhost:4444/about/api/v1.0.0/find/1
+    // http://localhost:9999/about/api/v1.0.0/find/1
     @Override
     @GetMapping(value="/find/{id}")
     public ResponseEntity<ApiResult<?>> objectApiFindById(@PathVariable(name = "id") Long id) {
@@ -120,7 +120,7 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
     }
 
     // UPDATE
-    // http://localhost:4444/about/api/v1.0.0/update/1
+    // http://localhost:9999/about/api/v1.0.0/update/1
     @Override
     @PutMapping(value="/update/{id}")
     public ResponseEntity<ApiResult<?>> objectApiUpdate(@PathVariable(name = "id") Long id, @Valid @RequestBody AboutDto aboutDto) {
@@ -134,7 +134,7 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
 
 
     // Image
-    // http://localhost:4444/register/api/v1.0.0/update/1
+    // http://localhost:9999/register/api/v1.0.0/update/1
     @PutMapping(
             value = {"/update", "/update/{id}"},
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
@@ -181,7 +181,7 @@ public class AboutApiImpl implements IAboutApi<AboutDto> {
     }
 
     // DELETE BY ID
-    // http://localhost:4444/about/api/v1.0.0/delete/1
+    // http://localhost:9999/about/api/v1.0.0/delete/1
     @Override
     @DeleteMapping(value="/delete/{id}")
     public ResponseEntity<ApiResult<?>> objectApiDelete(@PathVariable(name = "id") Long id) {

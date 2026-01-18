@@ -8,12 +8,12 @@
  * - ENDPOINTS: Tüm API yolları merkezi olarak buradan yönetilir; backend endpoint'iniz değişirse tek yerden güncellenir.
  */
 
-// Backend ana adresi (örn: http://localhost:4444)
+// Backend ana adresi (örn: http://localhost:9999)
 // .env dosyanızda VITE_API_BASE veya REACT_APP_API_BASE varsa onu kullanır.
 export const API_BASE =
   import.meta?.env?.VITE_API_BASE || // Vite ortamı için (örn. VITE_API_BASE)
   process.env.REACT_APP_API_BASE || // CRA ortamı için (örn. REACT_APP_API_BASE)
-  'http://localhost:4444'; // Lokal fallback
+  'http://localhost:9999'; // Lokal fallback
 
 // Resimlerin geldiği kök URL
 export const IMAGE_BASE =

@@ -1,12 +1,12 @@
 Postman hızlı test
 1) Kategori ekle (varsa atla)
-POST  http://localhost:4444/blog/category/api/v1.0.0/create
+POST  http://localhost:9999/blog/category/api/v1.0.0/create
 Body raw JSON:
 { "categoryName": "Genel" }
 
 ---------------------------------------------------------------------
 2) Blog create — JSON (resimsiz)
-POST  http://localhost:4444/blog/api/v1.0.0/create
+POST  http://localhost:9999/blog/api/v1.0.0/create
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ---------------------------------------------------------------------
 3) Blog create — Multipart (resimli)
-POST  http://localhost:4444/blog/api/v1.0.0/create
+POST  http://localhost:9999/blog/api/v1.0.0/create
 Content-Type: multipart/form-data
 
 Key: blog    (Text)  -> {"header":"AI","title":"CNN","content":"...","blogCategoryDto":{"categoryId":1}}
@@ -29,7 +29,7 @@ Key: file    (File)  -> <seç>
 
 ---------------------------------------------------------------------
 4) Blog update — JSON (resimsiz)
-PUT  http://localhost:4444/blog/api/v1.0.0/update/1
+PUT  http://localhost:9999/blog/api/v1.0.0/update/1
 Content-Type: application/json
 
 {
@@ -40,7 +40,7 @@ Content-Type: application/json
 
 ---------------------------------------------------------------------
 5) Blog update — Multipart (resimli)
-PUT  http://localhost:4444/blog/api/v1.0.0/update/1
+PUT  http://localhost:9999/blog/api/v1.0.0/update/1
 Content-Type: multipart/form-data
 
 Key: blog (Text) -> {"title":"Yeni Başlık","blogCategoryDto":{"categoryId":1}}

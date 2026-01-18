@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile: DockerfileBackend
     ports:
-      - "4444:4444"
+      - "9999:9999"
     networks:
       - fullstack_network
 

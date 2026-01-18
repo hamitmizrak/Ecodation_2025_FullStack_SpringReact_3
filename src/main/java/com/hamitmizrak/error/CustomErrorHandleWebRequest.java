@@ -108,7 +108,7 @@ public class CustomErrorHandleWebRequest implements ErrorController {
 
     /**
      * Test endpoint
-     * http://localhost:4444/test/apiresult
+     * http://localhost:9999/test/apiresult
      * Bu endpoint isteğe bağlı olarak hata üretmek için kullanılabilir
      */
     @GetMapping("/test/apiresult")

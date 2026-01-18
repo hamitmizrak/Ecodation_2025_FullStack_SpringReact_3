@@ -2248,7 +2248,7 @@ public ResponseEntity<List<AddressDto>> addressApiList() {
 4. **`params`:**
     - GET isteğinde belirli bir query parametresinin bulunmasını zorunlu kılar.
     - Örnek: `params = "active=true"`
-    - EndPoint: http://lcaolhost:4444/list?active=true
+    - EndPoint: http://lcaolhost:9999/list?active=true
 
 5. **`consumes`:**
     - İstek veri formatını (Content-Type) belirtir, sadece bu formatta gelen verileri kabul eder.
@@ -2319,9 +2319,9 @@ value = "/list"
 ```
 - **Açıklama:** `value` özelliği, GET isteğinin URL yolunu tanımlar.
 - Bu, istemcinin hangi URL'ye istek yapacağını belirleyen temel yoldur.
-- **Anlamı:** `/list` olarak belirlenen bu URL, istemcinin `http://localhost:4444/api/address/list` adresine GET isteği yaparak bu metoda ulaşmasını sağlar.
+- **Anlamı:** `/list` olarak belirlenen bu URL, istemcinin `http://localhost:9999/api/address/list` adresine GET isteği yaparak bu metoda ulaşmasını sağlar.
 - Uygulamanın çalıştığı kök URL ve sınıf düzeyinde tanımlanan yol (muhtemelen `/api/address`) bu yolun tam halini belirler.
-- **Kullanımı:** İstemci, bu API'ye erişmek istediğinde `http://localhost:4444/api/address/list` yoluna bir GET isteği yapar.
+- **Kullanımı:** İstemci, bu API'ye erişmek istediğinde `http://localhost:9999/api/address/list` yoluna bir GET isteği yapar.
 - Bu URL, servise dışarıdan erişim için kapı görevi görür.
 
 #### 3. **`params`:**
@@ -2329,7 +2329,7 @@ value = "/list"
 params = "active=true"
 ```
 - **Açıklama:** `params` özelliği, HTTP isteğinin belirli bir query parametresini içermesi gerektiğini belirtir. Burada, URL'de belirli parametreler bulunması zorunlu kılınmıştır.
-- **Anlamı:** API çağrısı yapılırken, URL'de `active=true` query parametresi olmalıdır. Örneğin: `http://localhost:4444/api/address/list?active=true` şeklinde bir GET isteği yapılması gerekir.
+- **Anlamı:** API çağrısı yapılırken, URL'de `active=true` query parametresi olmalıdır. Örneğin: `http://localhost:9999/api/address/list?active=true` şeklinde bir GET isteği yapılması gerekir.
 - Eğer bu parametre belirtilmezse veya değeri farklı olursa, istek bu metoda yönlendirilmez.
 - **Kullanımı:** `params` özelliği ile aynı endpoint'e farklı parametreler göndererek farklı işlemler gerçekleştirebiliriz.
 - Parametre kontrolü, isteğin doğru metodla eşleşmesini sağlar.
@@ -2397,11 +2397,11 @@ public ResponseEntity<List<AddressDto>> addressApiList() {
 - Bu, veritabanı veya başka bir kaynaktan verilerin alınmasını ve işlenmesini sağlar. Burada işlenen veri, API yanıtı olarak döndürülecektir.
 
 ### API’nin Nasıl Çalışacağı:
-Bu metod, `http://localhost:4444/api/address/list` URL'sine yapılan GET isteklerini karşılar. Ancak bu
+Bu metod, `http://localhost:9999/api/address/list` URL'sine yapılan GET isteklerini karşılar. Ancak bu
 
 isteğin çalışabilmesi için birkaç koşul vardır:
 
-1. **URL Parametresi:** İstek, `active=true` query parametresini içermelidir. Örneğin: `http://localhost:4444/api/address/list?active=true`.
+1. **URL Parametresi:** İstek, `active=true` query parametresini içermelidir. Örneğin: `http://localhost:9999/api/address/list?active=true`.
 2. **Başlıklar (Headers):** HTTP isteği, `X-API-VERSION: 1` başlığını içermelidir. Bu, API'nin doğru versiyonuna eriştiğinizi garanti eder.
 3. **İçerik Tipi (Content-Type):** İstek verisi JSON formatında olmalıdır, yani `Content-Type: application/json` başlığı ile gönderilmelidir.
 4. **Yanıt Formatı (Produces):** Yanıt JSON formatında döndürülecektir. İstemci, bu yanıtı alacaksa `Accept: application/json` başlığı ile çağrı yapabilir.

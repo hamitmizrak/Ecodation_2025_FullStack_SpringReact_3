@@ -144,7 +144,7 @@ public class RegisterServicesImpl implements IRegisterServices<RegisterDto, Regi
         //message.setCc(this.serverMailAddress);
         String mailContent =
                 "<mark>Üyeliğinizi aktifleşmesine son bir adım lütfen linke tıklayınız.</mark>" +
-                        "http://localhost:4444/register/api/v1.0.0/confirm?token=" + token;
+                        "http://localhost:9999/register/api/v1.0.0/confirm?token=" + token;
         simpleMailMessage.setText(mailContent);
         // Send Mail
         mailSender.send(simpleMailMessage);

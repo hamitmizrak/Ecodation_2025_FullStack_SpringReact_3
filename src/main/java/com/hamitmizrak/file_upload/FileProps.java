@@ -15,7 +15,7 @@ public class FileProps {
     /** application.yml -> file.upload-dir */
     private String uploadDir = "upload";
 
-    /** application.yml -> file.base-url (örn: http://localhost:4444) */
+    /** application.yml -> file.base-url (örn: http://localhost:9999) */
     private String baseUrl;
 
     public Path getUploadRoot() {

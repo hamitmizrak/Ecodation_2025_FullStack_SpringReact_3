@@ -50,7 +50,7 @@ public class AuthApiImpl {
     // AUTH
 
     // LOGIN
-    // POST: http://localhost:4444/auth/api/v1/login
+    // POST: http://localhost:9999/auth/api/v1/login
     @PostMapping("/login")
     public ResponseEntity<ApiResult<AuthResponse>> login(@RequestBody LoginRequest request) {
         try {
@@ -99,7 +99,7 @@ public class AuthApiImpl {
     }
 
     // ME (oturum sahibi)
-    // GET: http://localhost:4444/auth/api/v1/me
+    // GET: http://localhost:9999/auth/api/v1/me
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public ResponseEntity<ApiResult<UserMe>> me() {
@@ -118,7 +118,7 @@ public class AuthApiImpl {
     }
 
     // REFRESH (Header: Authorization: Bearer <token>)
-    // POST: http://localhost:4444/auth/api/v1/refresh
+    // POST: http://localhost:9999/auth/api/v1/refresh
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/refresh")
     public ResponseEntity<ApiResult<AuthResponse>> refresh(@RequestHeader(name = "Authorization", required = false) String authorization) {
@@ -170,7 +170,7 @@ public class AuthApiImpl {
     }
 
     // ROLE-BASED ÖRNEK (ADMIN)
-    // GET: http://localhost:4444/auth/api/v1/admin/ping
+    // GET: http://localhost:9999/auth/api/v1/admin/ping
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/ping")
     public ResponseEntity<ApiResult<String>> adminPing() {
@@ -178,7 +178,7 @@ public class AuthApiImpl {
     }
 
     // ROLE-BASED ÖRNEK (USER veya ADMIN)
-    // GET: http://localhost:4444/auth/api/v1/user/ping
+    // GET: http://localhost:9999/auth/api/v1/user/ping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping("/user/ping")
     public ResponseEntity<ApiResult<String>> userPing() {

@@ -189,7 +189,7 @@ public class AddresServiceImpl implements IAddressService<AddressDto, AddressEnt
 
     // FIND BY ID (Address)
     // REDIS : için aşağıdaki linktten çalışıp çalışmadığını bu linkten anlayabiliriz
-    // http://localhost:4444/api/address/v1.0.0/find/1
+    // http://localhost:9999/api/address/v1.0.0/find/1
     @Cacheable(value = "addressFindByIdCache", key = "#id")
     @Override
     public AddressDto objectServiceFindById(Long id) {
@@ -282,8 +282,8 @@ public class AddresServiceImpl implements IAddressService<AddressDto, AddressEnt
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ROOT (Spring MVC)
-    // http://localhost:4444/api/address
-    // http://localhost:4444/api/address/index
+    // http://localhost:9999/api/address
+    // http://localhost:9999/api/address/index
     // Thymeleaf, React veya Angular için gerekli olabiliyor.
     @GetMapping("/index")
     public ResponseEntity<?> getRoot() {

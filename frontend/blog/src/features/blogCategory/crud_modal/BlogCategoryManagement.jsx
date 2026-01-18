@@ -109,7 +109,7 @@ function BlogCategoryManagement({props, t, i18n}) {
             setError('');
 
             // ASENKRON API ÇAĞRI
-            // const response = await fetch('http://localhost:4444/blog/category/api/v1/list');
+            // const response = await fetch('http://localhost:9999/blog/category/api/v1/list');
             const response = await BlogCategoryApiService.objectApiList();
             if (response.status === 200) {
                 setBlogCategoryApiListData(response.data);

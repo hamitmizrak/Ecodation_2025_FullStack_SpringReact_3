@@ -2,7 +2,7 @@
 # mvn clean package -DskipTests
 
 # docker image build -t imageAdi .
-# docker container run -d -p 4444:4444 --rm --name blog
+# docker container run -d -p 9999:9999 --rm --name blog
 
 # JDK
 FROM openjdk:17
@@ -13,7 +13,7 @@ LABEL maintainer="hamitmizrak@gmail.com"
 #Çevresel değişkenler
 ENV APP_NAME="Full Stack Spring Boot"
 ENV VERSION="v1.0.0"
-ENV PORT="4444"
+ENV PORT="9999"
 
 # Çevresel Değişkenleri RUN
 RUN echo "App Name: $APP_NAME"
@@ -24,7 +24,7 @@ RUN echo "Port: $PORT"
 VOLUME /tmp
 
 # Port
-EXPOSE 4444
+EXPOSE 9999
 
 # mvn clean && mvn package
 # Proje Jar ismini
@@ -40,7 +40,7 @@ ENTRYPOINT ["java","-jar","/blog_springboot_react"]
 # HEALTHCHECK: Sağlık kontrolünü Eklesin
 # HEALTHCHECK: Bu container çalışıyor mu ?
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:4444/ || exit 1
+    CMD curl -f http://localhost:9999/ || exit 1
 
 
 

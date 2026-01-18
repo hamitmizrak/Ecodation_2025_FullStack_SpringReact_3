@@ -46,7 +46,7 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     // CRUD
 
     // CREATE (Address)
-    // http://localhost:4444/api/address/create
+    // http://localhost:9999/api/address/create
     @Override
     @PostMapping("/create")
     public ResponseEntity<ApiResult<?>> objectApiCreate(@Valid @RequestBody AddressDto addressDto) {
@@ -59,7 +59,7 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     }
 
     // LIST (Address)
-    // http://localhost:4444/api/address/list
+    // http://localhost:9999/api/address/list
     @Override
     @GetMapping("/list")
     public ResponseEntity<ApiResult<List<AddressDto>>> objectApiList() {
@@ -72,11 +72,11 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     }
 
     // FIND BY ID (Address)
-    // http://localhost:4444/api/address/find
-    // http://localhost:4444/api/address/find/0
-    // http://localhost:4444/api/address/find/-1
-    // http://localhost:4444/api/address/find/%20%  %20%=boşluk
-    // http://localhost:4444/api/address/find/1
+    // http://localhost:9999/api/address/find
+    // http://localhost:9999/api/address/find/0
+    // http://localhost:9999/api/address/find/-1
+    // http://localhost:9999/api/address/find/%20%  %20%=boşluk
+    // http://localhost:9999/api/address/find/1
     @Override
     @GetMapping({"/find/", "/find/{id}"})
     public ResponseEntity<ApiResult<?>> objectApiFindById(@PathVariable(name = "id", required = false) Long id) {
@@ -100,7 +100,7 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     }
 
     // UPDATE (Address)
-    // http://localhost:4444/api/address/update/1
+    // http://localhost:9999/api/address/update/1
     @Override
     @PutMapping({"/update/", "/update/{id}"})
     public ResponseEntity<ApiResult<?>> objectApiUpdate(
@@ -115,7 +115,7 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     }
 
     // DELETE BY ID (Address)
-    // http://localhost:4444/api/address/delete/1
+    // http://localhost:9999/api/address/delete/1
     @Override
     @DeleteMapping({"/delete/", "/delete/{id}"})
     public ResponseEntity<ApiResult<?>> objectApiDelete(@PathVariable(name = "id", required = false) Long id) {

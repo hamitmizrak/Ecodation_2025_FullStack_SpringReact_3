@@ -3,7 +3,7 @@
 REGISTER
 
 POST
-http://localhost:4444/register/api/v1.0.0/create/1
+http://localhost:9999/register/api/v1.0.0/create/1
 
 {
   "registerName": "hamit",
@@ -23,7 +23,7 @@ tıkladığımda Account_non_lockerd  true olacak
 LOGIN
 
 POST
-http://localhost:4444/auth/api/v1/login
+http://localhost:9999/auth/api/v1/login
 {
  "email": "hamitmizrak@gmail.com",
   "password": "Hm123456@."
@@ -36,7 +36,7 @@ Bearer Token vericek:  eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1
 TEST
 
 GET
-http://localhost:4444/role/api/v1.0.0/list
+http://localhost:9999/role/api/v1.0.0/list
 
 Bearer Token eklemeden 403 alırsın:(HATA)
 

@@ -33,7 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
     }*/
 
 
-    // http://localhost:4444/upload
+    // http://localhost:9999/upload
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         Path uploadRoot = fileProps.getUploadRoot();
@@ -93,7 +93,7 @@ public class WebConfig implements WebMvcConfigurer {
     //////////////////////////////////////////////////////////////////////////////////
     // Interceptor
     // Dili değiştirmek için LocaleChangeInterceptor eklenir
-    // http://localhost:4444?lang=ge
+    // http://localhost:9999?lang=ge
      /*
     Açıklamalar:
     CookieLocaleResolver: Kullanıcının seçtiği dili bir cookie'de saklar. Bu sayede kullanıcı uygulamaya tekrar girdiğinde aynı dili kullanabilir.

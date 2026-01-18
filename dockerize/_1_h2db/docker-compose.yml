@@ -22,4 +22,4 @@ services:
     restart: on-failure
     build: ..
     ports:
-      - "4444:4444"
+      - "9999:9999"

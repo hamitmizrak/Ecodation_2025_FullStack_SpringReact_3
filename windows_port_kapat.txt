@@ -1,6 +1,6 @@
 Window ==> port kapatmak
 
-netstat -aon | findstr :4444
+netstat -aon | findstr :9999
 
 tasklist | findstr PID
 tasklist | findstr 1234

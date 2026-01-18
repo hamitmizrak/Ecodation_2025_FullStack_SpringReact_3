@@ -165,11 +165,11 @@ backend_frontend_deployment() {
 
         ./shell_countdown.sh
         echo -e "######### Docker Backend Actuator Health #########\n"
-        # curl http://localhost:4444/actuator/health
+        # curl http://localhost:9999/actuator/health
 
         ./shell_countdown.sh
         echo -e "######### Docker Backend application/json testi #########\n"
-        # curl -H "Accept: application/json" http://container_blog_springboot_react:4444/blog/category/api/v1/list
+        # curl -H "Accept: application/json" http://container_blog_springboot_react:9999/blog/category/api/v1/list
 
         ./shell_countdown.sh
         echo -e "######### Docker Backend Container Listesi #########\n"
@@ -189,7 +189,7 @@ backend_frontend_deployment() {
         docker logs container_blog_react
         #docker exec -it container_blog_react sh
         #ping container_blog_springboot
-        #curl http://container_blog_springboot:4444/blog/category/api/v1/list
+        #curl http://container_blog_springboot:9999/blog/category/api/v1/list
 
         ./shell_countdown.sh
         echo -e "######### Docker Network Listesini Bulma #########\n"
